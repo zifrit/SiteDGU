@@ -1,0 +1,16 @@
+{% extends 'Students/Base_student.html' %}
+
+{% block content %}
+    <div class="container">
+    <div class="col-6 order-md-last">
+    <form action="" method="post">{% csrf_token %}
+    {% for f in form %}
+        <p><label for="{{ f.id_for_label}}">{{ f.label }}:</label>{{ f }}</p>
+        <div>{{ f.errors }}</div>
+    {% endfor %}
+        <button type="submit" class="btn btn-info">assssdas</button>
+    </form>
+
+    </div>
+    </div>
+{% endblock %}

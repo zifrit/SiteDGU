@@ -5,6 +5,7 @@ from .models import *
 
 admin.site.register(StatusStudent)
 admin.site.register(TypeDirection)
+admin.site.register(CustomUser)
 
 @admin.register(InfoStudent)
 class AdminInfoStudent(admin.ModelAdmin):

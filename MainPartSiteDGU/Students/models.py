@@ -1,10 +1,29 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
 # Create your models here.
 
-def directory_path(instance, filename):
-    return f'photo/%Y/%m.%d/{filename}'
+# def directory_path(instance, filename):
+#     return f'photo/%Y/%m.%d/{filename}'
+
+class CustomUser(AbstractUser):
+    ROLES = (
+        ('T', 'Преподаватель'),
+        ('S', 'Студент'),
+        ('E', 'Староста'),
+    )
+    roles = models.CharField(choices=ROLES,
+                             max_length=2,
+                             blank=True,
+                             null=True,
+                             )
+
+    class Meta:
+        db_table = 'Dj_CUser'
+
+    def __str__(self):
+        return f'{self.username}'
 
 
 class InfoStudent(models.Model):
@@ -31,7 +50,7 @@ class InfoStudent(models.Model):
     course = models.IntegerField(choices=TYPE_STATUS,
                                  default=0
                                  )
-    photo_student = models.FileField(upload_to=directory_path,
+    photo_student = models.FileField(upload_to='photo/%Y/%m.%d/',
                                      verbose_name='фото студента'
                                      )
     student_status = models.ForeignKey(to='Students.StatusStudent',
