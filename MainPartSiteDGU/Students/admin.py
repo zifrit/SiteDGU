@@ -6,12 +6,13 @@ from .models import *
 admin.site.register(StatusStudent)
 admin.site.register(TypeDirection)
 admin.site.register(CustomUser)
+# admin.site.register(Test)
 
 @admin.register(InfoStudent)
 class AdminInfoStudent(admin.ModelAdmin):
     list_display = [
         'last_name',
-        'first_name',
+        'name',
         'direction',
         'course',
 

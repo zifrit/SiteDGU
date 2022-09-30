@@ -27,7 +27,7 @@ class CustomUser(AbstractUser):
 
 
 class InfoStudent(models.Model):
-    first_name = models.CharField(max_length=255,
+    name = models.CharField(max_length=255,
                                   verbose_name='Имя'
                                   )
     last_name = models.CharField(max_length=255,
@@ -40,6 +40,7 @@ class InfoStudent(models.Model):
     direction = models.ForeignKey(to='Students.TypeDirection',
                                   verbose_name='Направление',
                                   on_delete=models.CASCADE,
+                                  default=1
                                   )
     TYPE_STATUS = (
         (1, '1-курс'),
@@ -50,14 +51,14 @@ class InfoStudent(models.Model):
     course = models.IntegerField(choices=TYPE_STATUS,
                                  default=0
                                  )
-    photo_student = models.FileField(upload_to='photo/%Y/%m.%d/',
-                                     verbose_name='фото студента'
-                                     )
     student_status = models.ForeignKey(to='Students.StatusStudent',
                                        verbose_name='статус студента',
                                        on_delete=models.CASCADE,
                                        default=1
                                        )
+    photo_student = models.FileField(upload_to='photo/%Y/%m.%d/',
+                                     verbose_name='фото студента'
+                                     )
     social_status = models.BooleanField(verbose_name='социальная справка',
                                         )
     time_create = models.DateTimeField(auto_now_add=True,
@@ -71,7 +72,7 @@ class InfoStudent(models.Model):
         db_table = 'InfoStudent'
 
     def __str__(self):
-        return f'{self.first_name} {self.last_name}'
+        return f'{self.name} {self.last_name}'
 
 
 class StatusStudent(models.Model):

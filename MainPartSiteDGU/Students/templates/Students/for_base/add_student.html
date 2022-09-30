@@ -2,15 +2,20 @@
 
 {% block content %}
     <div class="container">
-    <div class="col-6 order-md-last">
-    <form action="" method="post">{% csrf_token %}
-    {% for f in form %}
-        <p><label for="{{ f.id_for_label}}">{{ f.label }}:</label>{{ f }}</p>
-        <div>{{ f.errors }}</div>
+        <div class="col-sm-6 ">
+            <form action="" method="post" class="needs-validation" enctype="multipart/form-data">
+                {% csrf_token %}
+{#                {% for f in form %}#}
+{#                    <p><label class="form-check-label" for="{{ f.id_for_label }}">{{ f.label }}:</label> {{ f }}</p>#}
+{#                    <div class="form-error">{{ f.errors }}</div>#}
+{#                {% endfor %}#}
+                {{ form.as_p }}
+                <hr class="my-4">
+                <button class="w-100 btn btn-primary btn-lg" type="submit" href="admin/">Добавить Студента</button>
+            </form>
+        </div>
+    </div>
+    {% for i in error %}
+        <p>{{ i }}</p>
     {% endfor %}
-        <button type="submit" class="btn btn-info">assssdas</button>
-    </form>
-
-    </div>
-    </div>
 {% endblock %}
