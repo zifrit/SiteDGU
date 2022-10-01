@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth.forms import AuthenticationForm
 from django.core.exceptions import ValidationError
 
 from .models import *
@@ -27,7 +28,6 @@ class AddNewStudent(forms.ModelForm):
     #         raise ValidationError('ошибка')
 
 
-# class TestForm(forms.ModelForm):
-#     class Meta:
-#         model = Test
-#         fields = '__all__'
+class Login(AuthenticationForm):
+    username = forms.CharField(label='Логин', widget=forms.TextInput(attrs={'class': 'form-control'}))
+    password = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'form-control'}))

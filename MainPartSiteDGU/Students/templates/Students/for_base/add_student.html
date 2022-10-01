@@ -1,20 +1,21 @@
 {% extends 'Students/Base_student.html' %}
 
 {% block content %}
-    <div class="container">
-        <div class="col-sm-6 ">
-            <form action="" method="post" class="needs-validation" enctype="multipart/form-data">
+    <div class="container" style="display: flex">
+        <div class="col-sm-6 " style="margin-right: 150px">
+            <form action="." method="post" class="needs-validation" enctype="multipart/form-data">
                 {% csrf_token %}
-{#                {% for f in form %}#}
-{#                    <p><label class="form-check-label" for="{{ f.id_for_label }}">{{ f.label }}:</label> {{ f }}</p>#}
-{#                    <div class="form-error">{{ f.errors }}</div>#}
-{#                {% endfor %}#}
-                {{ form.as_p }}
+                {% for f in form %}
+                    <p><label class="form-check-label" for="{{ f.id_for_label }}">{{ f.label }}:</label> {{ f }}</p>
+                    <div class="form-error">{{ f.errors }}</div>
+                {% endfor %}
                 <hr class="my-4">
                 <button class="w-100 btn btn-primary btn-lg" type="submit" href="admin/">Добавить Студента</button>
             </form>
         </div>
+    <img src="https://oms.karelia.ru/upload/iblock/9c8/9c862841f21b95414ad281b484ccad3e.jpg" alt="register_foto" width="500" height="300" style="margin-top: 150px">
     </div>
+
     {% for i in error %}
         <p>{{ i }}</p>
     {% endfor %}
