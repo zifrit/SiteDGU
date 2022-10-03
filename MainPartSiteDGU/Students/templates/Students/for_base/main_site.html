@@ -1,0 +1,29 @@
+{% extends 'Students/Base_student.html' %}
+{% block content %}
+    <div class="container">
+        <form class="d-flex" role="search">
+            {% csrf_token %}
+            <input class="form-control me-2" type="search" placeholder="ФИО стулента">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+        {% for i in model %}
+            <div class="d-flex flex-row bd-highlight mb-2" style="margin-left: 100px">
+                <div class="p-2 bd-highlight">
+                    <img src="{{ i.photo_student.url }}" alt="фото студента" width="250px" height="150px">
+                </div>
+                <div class="p-2 bd-highlight">
+                    <a href="{% url 'logout' %}" class="h2">{{ i.get_full_name }}</a>
+                    <p class="h3">{{ i.course }}</p>
+                    <p class="h3">{{ i.direction }}</p>
+                </div>
+            </div>
+        {% endfor %}
+        <ul class="pagination" style="margin-left: 600px">
+            {% for i in model.paginator.page_range %}
+                <li class="page-item">
+                    <a href="?page={{ i }}" class="page-link">{{ i }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

@@ -71,6 +71,9 @@ class InfoStudent(models.Model):
     class Meta:
         db_table = 'InfoStudent'
 
+    def get_full_name(self):
+        return f'{self.last_name} {self.name} {self.middle_name}'
+
     def __str__(self):
         return f'{self.name} {self.last_name}'
 

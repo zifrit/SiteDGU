@@ -28,6 +28,6 @@ class AddNewStudent(forms.ModelForm):
     #         raise ValidationError('ошибка')
 
 
-class Login(AuthenticationForm):
+class Login_s(AuthenticationForm):
     username = forms.CharField(label='Логин', widget=forms.TextInput(attrs={'class': 'form-control'}))
     password = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'form-control'}))

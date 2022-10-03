@@ -1,5 +1,6 @@
 from django.contrib.auth import logout
 from django.contrib.auth.views import LoginView
+from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 
@@ -16,7 +17,7 @@ class Register(generic.CreateView):
 
 
 class Login(LoginView):
-    form_class = Login
+    form_class = Login_s
     template_name = 'Students/for_base/login.html'
     success_url = '/student/regist-student/'
 
@@ -27,6 +28,16 @@ class Login(LoginView):
 def logout_system(request):
     logout(request)
     return redirect('login')
+
+
+class Main(View):
+    def get(self, request):
+        model = InfoStudent.objects.all()
+        paginator = Paginator(model, 3)
+        page_number = request.GET.get('page')
+        page_ogj = paginator.get_page(page_number)
+        return render(request, "Students/for_base/main_site.html", {'model': page_ogj, 'page_ogj': page_ogj})
+#
 # class RegisterS(View) :
 #
 #     def get(self, request):
