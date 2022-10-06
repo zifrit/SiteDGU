@@ -1,11 +1,10 @@
 {% extends 'Students/Base_student.html' %}
 {% block content %}
     <body>
-    <div class="container">
+    <div class="vxod">
         <div class="col-sm-6 text-center" style="margin-left: 300px">
             <form action="." method="post" class="needs-validation">
             {% csrf_token %}
-                <h1 class="h3 mb-3 fw-normal">Вход</h1>
                 {% for f in form %}
                     <p><label class="h5 text-center" for="{{ f.id_for_label }}">{{ f.label }}</label> {{ f }}</p>
                     <div class="form-error">{{ f.errors }}</div>

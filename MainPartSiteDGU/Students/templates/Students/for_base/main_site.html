@@ -7,13 +7,13 @@
             <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
         {% for i in model %}
-            <div class="d-flex flex-row bd-highlight mb-2" style="margin-left: 100px">
+            <div class="d-flex bd-highlight mb-3" style="margin-left: 100px">
                 <div class="p-2 bd-highlight">
                     <img src="{{ i.photo_student.url }}" alt="фото студента" width="250px" height="150px">
                 </div>
                 <div class="p-2 bd-highlight">
-                    <a href="{% url 'logout' %}" class="h2">{{ i.get_full_name }}</a>
-                    <p class="h3">{{ i.course }}</p>
+                    <a href="{% url 'detail_student' i.pk %}" class="h2 style-href">{{ i.get_full_name }}</a>
+                    <p class="h3">{{ i.get_course_display }}</p>
                     <p class="h3">{{ i.direction }}</p>
                 </div>
             </div>

@@ -1,0 +1,65 @@
+ul.hr {
+    display: flex;
+    margin: 0; /* Обнуляем значение отступов */
+    padding: 4px; /* Значение полей */
+}
+
+ul.hr li {
+    display: inline; /* Отображать как строчный элемент */
+    margin-right: 5px; /* Отступ слева */
+    padding: 3px; /* Поля вокруг текста */
+}
+
+ul.hr a {
+    text-decoration: none;
+}
+
+ul.hr a:hover {
+    color: #46b4e3; /* изменение при наведении цвета */
+}
+
+
+.bot_login {
+    border: 5px red;;
+    background: white; /* Цвет фона */
+    color: #0d6efd; /* Цвет текста */
+    padding: 5px; /* Поля вокруг текста */
+    border-radius: 5px; /* Уголки */
+    /*border-style: none; !* убриет рамки *!*/
+}
+
+.bot_login:focus {
+    /*background: #007E3E; !* Цвет фона *!*/
+    box-shadow: 0 0 0 4px red;
+    background: #0d6efd;
+    color: white;
+}
+
+/* убриет рамки */
+
+
+.bot_login:hover {
+    outline: none;
+    box-shadow: 0 0 0 4px #cbd6ee;
+    background: #0d6efd;
+    color: white;
+}
+
+.vxod{
+    margin: 150px 620px;
+}
+
+.style-href{
+    text-decoration: none
+}
+.style-href:hover{
+    color: #46b4e3;
+}
+
+.infostudent{
+    color: #0d6efd;
+}
+
+.detailstudent{
+text-align: center;
+}
