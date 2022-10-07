@@ -2,18 +2,26 @@
 
 {% block content %}
     <div class="container">
-        <div class="detailstudent">
-            <img src="{{ student.photo_student.url }}" alt="фото студента" width="350px" height="250px"
-                 class="photostudent">
-        </div>
-        <h3 class="infostudent">ФИО: {{ student.get_full_name }}</h3>
-        <h3 class="infostudent">Статус студента: {{ student.student_status }}</h3>
-        <h3 class="infostudent">Курс: {{ student.get_course_display }}</h3>
-        <h3 class="infostudent">Направление: {{ student.direction }}</h3>
-        {% if student.social_status %}
-            <h3 class="infostudent">Социальная справка: есть</h3>
+        {% if request.user.roles == "B" %}
+            <div class="detailstudent">
+                <img src="{{ student.photo_student.url }}" alt="фото студента" width="350px" height="250px"
+                     class="photostudent">
+            </div>
+            <h3 class="infostudent">ФИО: <span style="color: ">{{ student.get_full_name }}</span></h3>
+            <h3 class="infostudent">Статус студента: <span>{{ student.student_status }}</span></h3>
+            <h3 class="infostudent">Курс: <span>{{ student.get_course_display }}</span></h3>
+            <h3 class="infostudent">Направление: <span>{{ student.direction }}</span></h3>
+            {% if student.social_status %}
+                <h3 class="infostudent">Социальная справка: <span>есть</span></h3>
+            {% else %}
+                <h3 class="infostudent">Социальная справка: <span>нету</span></h3>
+            {% endif %}
+            <h3 class="infostudent">Направление: <a href="{{ student.photo_social_reference.url }}" style="color: #46b4e3; text-decoration: none;">Социальная справка</a></h3>
+            <h3 class="infostudent">Направление: <span>{{ student.direction }}</span></h3>
+
+        {% elif request.user.roles == 'T' %}
+            {{ form.as_p }}
         {% else %}
-            <h3 class="infostudent">Социальная справка: нету </h3>
         {% endif %}
     </div>
 

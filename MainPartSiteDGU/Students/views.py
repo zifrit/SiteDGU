@@ -9,21 +9,35 @@ from .models import *
 from .forms import *
 from django.views import generic, View
 
+# permission
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 #
-class Register(generic.CreateView):
-    form_class = AddNewStudent
+class BaseRegister(LoginRequiredMixin, generic.CreateView):
+    login_url = 'login'
+    form_class = FormBaseRegisterStudent
     template_name = 'Students/for_base/add_student.html'
-    success_url = '/student/regist-student/'
+    success_url = '/student/type_reg_student/'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['reg'] = False
         return context
 
 
+class AdvancedRegisterStudent(BaseRegister):
+    form_class = FormAdvancedRegisterStudent
+
+
+class FullRegisterStudent(BaseRegister):
+    form_class = FormFullRegisterStudent
+
+
 class Login(LoginView):
-    form_class = Login_s
+    form_class = FormLogin_s
     template_name = 'Students/for_base/login.html'
+
     # success_url = '/student/main/'
 
     def get_success_url(self):
@@ -35,7 +49,9 @@ def logout_system(request):
     return redirect('login')
 
 
-class Main(View):
+class Main(LoginRequiredMixin, View):
+    login_url = 'login'
+
     def get(self, request):
         model = InfoStudent.objects.all()
         paginator = Paginator(model, 5)
@@ -44,10 +60,21 @@ class Main(View):
         return render(request, "Students/for_base/main_site.html", {'model': page_ogj, 'page_ogj': page_ogj})
 
 
-class DetailStudent(DetailView):
+class DetailStudent(LoginRequiredMixin, DetailView):
+    login_url = 'login'
     model = InfoStudent
     template_name = 'Students/for_base/detail_student.html'
     context_object_name = 'student'
+
+
+class Test(View):
+
+    def get(self, request, pk):
+        model = InfoStudent.objects.get(id=pk)
+        form = FormFullRegisterStudent(instance=model)
+        return render(request, 'Students/for_base/detail_student.html', {'form': form, 'student':model})
+
+
 #
 # class RegisterS(View) :
 #
@@ -74,6 +101,9 @@ class DetailStudent(DetailView):
 #     form = form.save()
 #     return redirect('home')
 
-# class RegisterS(View):
-#     def get(self, request):
-#         return render(request, 'Students/for_base/add_student.html', {})
+class TypeRegisterStudent(LoginRequiredMixin, View):
+    login_url = 'login'
+
+    def get(self, request):
+        but = [('Базовая', 'base_register'), ('Расширенная', 'advanced_register'), ('Полная', 'full_register')]
+        return render(request, 'Students/for_base/add_student.html', {'but': but, 'reg': True})

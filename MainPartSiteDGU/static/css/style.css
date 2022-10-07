@@ -20,23 +20,13 @@ ul.hr a:hover {
 
 
 .bot_login {
-    border: 5px red;;
+    border: 5px;
     background: white; /* Цвет фона */
     color: #0d6efd; /* Цвет текста */
     padding: 5px; /* Поля вокруг текста */
     border-radius: 5px; /* Уголки */
     /*border-style: none; !* убриет рамки *!*/
 }
-
-.bot_login:focus {
-    /*background: #007E3E; !* Цвет фона *!*/
-    box-shadow: 0 0 0 4px red;
-    background: #0d6efd;
-    color: white;
-}
-
-/* убриет рамки */
-
 
 .bot_login:hover {
     outline: none;
@@ -45,21 +35,60 @@ ul.hr a:hover {
     color: white;
 }
 
-.vxod{
+.w-30 {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    margin: 0px auto;
+}
+
+.bt-type-reg + .bt-type-reg {
+    margin-top: 15px;
+}
+
+.bt-type-reg {
+    font-size: 30px;
+    text-align: center;
+    text-decoration: none;
+    border: 5px;
+    background: #0d6efd; /* Цвет фона */
+    color: white; /* Цвет текста */
+    padding: 5px; /* Поля вокруг текста */
+    border-radius: 5px; /* Уголки */
+}
+
+.bt-type-reg:hover {
+    outline: none;
+    box-shadow: 0 0 0 5px #cbd6ee;
+    background: #095bd6;
+    color: white;
+}
+
+
+.vxod {
     margin: 150px 620px;
 }
 
-.style-href{
+.style-href {
     text-decoration: none
 }
-.style-href:hover{
+
+.style-href:hover {
     color: #46b4e3;
 }
 
-.infostudent{
-    color: #0d6efd;
+.infostudent {
+    color: #163769;
 }
 
-.detailstudent{
-text-align: center;
+.detailstudent {
+    text-align: center;
+}
+
+.active_hrf {
+
+}
+
+.nonactive_hrf {
+
 }

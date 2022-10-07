@@ -7,6 +7,8 @@ from .models import *
 admin.site.register(StatusStudent)
 admin.site.register(TypeDirection)
 admin.site.register(CustomUser)
+admin.site.register(OrganizationSector)
+admin.site.register(PersonalRoles)
 
 
 # admin.site.register(Test)
