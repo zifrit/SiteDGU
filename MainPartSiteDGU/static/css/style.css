@@ -20,7 +20,10 @@ ul.hr a:hover {
 
 
 .bot_login {
-    border: 5px;
+    text-decoration: none;
+    font-size: 20px;
+    margin: 10px;
+    border: 0;
     background: white; /* Цвет фона */
     color: #0d6efd; /* Цвет текста */
     padding: 5px; /* Поля вокруг текста */
@@ -39,7 +42,7 @@ ul.hr a:hover {
     width: 250px;
     display: flex;
     flex-direction: column;
-    margin: 0px auto;
+    margin: 0 auto;
 }
 
 .bt-type-reg + .bt-type-reg {

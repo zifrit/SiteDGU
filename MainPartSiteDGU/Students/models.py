@@ -6,6 +6,8 @@ from django.db import models
 
 # def directory_path(instance, filename):
 #     return f'photo/%Y/%m.%d/{filename}'
+from django.urls import reverse
+
 
 class CustomUser(AbstractUser):
     ROLES = (
@@ -15,6 +17,7 @@ class CustomUser(AbstractUser):
     )
     roles = models.CharField(choices=ROLES, max_length=2, blank=True,
                              default='S')
+    full_name = models.CharField(max_length=255, verbose_name='FIO', blank=True)
 
     class Meta:
         db_table = 'Dj_CUser'
@@ -67,25 +70,25 @@ class InfoStudent(models.Model):
         ('К', 'КДМ'),
         ('П', 'ПРОФКОМ'),
         ('С', 'СНО'),
-        ('Н', 'Нету'),
+        ('О', 'Отсутствует'),
     )
-    organization = models.CharField(choices=ORGANIZATION, verbose_name='организация', max_length=1, default='Н')
+    organization = models.CharField(choices=ORGANIZATION, verbose_name='организация', max_length=1, default='О')
     organization_sector = models.ForeignKey(to='OrganizationSector', verbose_name='Сектор организации',
                                             on_delete=models.SET_NULL, null=True)
-    time_create = models.DateTimeField(auto_now_add=True, verbose_name='дата создания')
-    time_update = models.DateTimeField(auto_now=True, verbose_name='дата изменения')
+    time_create = models.DateTimeField(auto_now_add=True, verbose_name='дата создания',)
+    time_update = models.DateTimeField(auto_now=True, verbose_name='дата изменения',)
 
     class Meta:
         db_table = 'InfoStudent'
 
     def get_full_name(self):
-        return f'{self.last_name} {self.name} {self.middle_name}'
+        return f'{self.surname} {self.name} {self.middle_name}'
 
-    def get_fields(self):
-        return [(field.verbose_name, field.value_from_object(self)) for field in self.__class__._meta.fields]
+    def get_absolute_url(self):
+        return reverse('detail_student', kwargs={'pk': self.pk})
 
     def __str__(self):
-        return f'{self.name} {self.last_name}'
+        return f'{self.surname} {self.name}'
 
 
 class StatusStudent(models.Model):

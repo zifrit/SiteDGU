@@ -12,17 +12,26 @@ from django.views import generic, View
 # permission
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+menu = [{'student': [{'title': "Главная", 'url_name': 'main'}],
+         'teacher': [{'title': "Главная", 'url_name': 'main'},
+                     {'title': "Список студентов ", 'url_name': 'main'},
+                     {'title': "Добавить студента", 'url_name': 'type_reg_student'}],
+         'birds': [{'title': "Главная", 'url_name': 'main'},
+                   {'title': "Список студентов ", 'url_name': 'main'}],
+         }]
+
 
 #
 class BaseRegister(LoginRequiredMixin, generic.CreateView):
     login_url = 'login'
     form_class = FormBaseRegisterStudent
     template_name = 'Students/for_base/add_student.html'
-    success_url = '/student/type_reg_student/'
+    success_url = '/type_reg_student/'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['reg'] = False
+        context['menu'] = menu
         return context
 
 
@@ -38,7 +47,13 @@ class Login(LoginView):
     form_class = FormLogin_s
     template_name = 'Students/for_base/login.html'
 
-    # success_url = '/student/main/'
+    def get_success_url(self):
+        return reverse_lazy('main')
+
+
+class Register(generic.CreateView):
+    form_class = CustomUserCreationForm
+    template_name = 'Students/for_base/login.html'
 
     def get_success_url(self):
         return reverse_lazy('main')
@@ -57,22 +72,36 @@ class Main(LoginRequiredMixin, View):
         paginator = Paginator(model, 5)
         page_number = request.GET.get('page')
         page_ogj = paginator.get_page(page_number)
-        return render(request, "Students/for_base/main_site.html", {'model': page_ogj, 'page_ogj': page_ogj})
+        return render(request, "Students/for_base/main_site.html", {'model': page_ogj, 'menu': menu})
 
 
-class DetailStudent(LoginRequiredMixin, DetailView):
-    login_url = 'login'
-    model = InfoStudent
-    template_name = 'Students/for_base/detail_student.html'
-    context_object_name = 'student'
+# class DetailStudent(LoginRequiredMixin, DetailView):
+#     login_url = 'login'
+#     model = InfoStudent
+#     template_name = 'Students/for_base/detail_student.html'
+#     context_object_name = 'student'
+#
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['menu'] = menu
+#         return context
 
 
-class Test(View):
+class DetailStudent(LoginRequiredMixin, View):
 
     def get(self, request, pk):
         model = InfoStudent.objects.get(id=pk)
         form = FormFullRegisterStudent(instance=model)
-        return render(request, 'Students/for_base/detail_student.html', {'form': form, 'student':model})
+        return render(request, 'Students/for_base/detail_student.html',
+                      {'form': form, 'student': model, 'menu': menu, 'pk': pk})
+
+    def post(self, request, pk):
+        model = InfoStudent.objects.get(id=pk)
+        form = FormFullRegisterStudent(request.POST, request.FILES, instance=model)
+        if form.is_valid():
+            form.save()
+        return render(request, 'Students/for_base/detail_student.html',
+                      {'form': form, 'student': model, 'menu': menu, 'pk': pk})
 
 
 #
@@ -106,4 +135,4 @@ class TypeRegisterStudent(LoginRequiredMixin, View):
 
     def get(self, request):
         but = [('Базовая', 'base_register'), ('Расширенная', 'advanced_register'), ('Полная', 'full_register')]
-        return render(request, 'Students/for_base/add_student.html', {'but': but, 'reg': True})
+        return render(request, 'Students/for_base/add_student.html', {'but': but, 'reg': True, 'menu': menu})
