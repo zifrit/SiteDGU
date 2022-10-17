@@ -1,0 +1,53 @@
+{% extends 'Students/Base_student.html' %}
+
+{% block content %}
+    <div class="container">
+        {% if not list %}
+            <div class="events">
+                <form action="." method="post" class="needs-validation" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% for f in form %}
+                        <p><label class="form-check-label" for="{{ f.id_for_label }}">{{ f.label }}:</label> {{ f }}</p>
+                        <div class="form-error">{{ f.errors }}</div>
+                    {% endfor %}
+                    <hr class="my-4">
+                    <button class="w-100 btn btn-primary btn-lg" type="submit">Добавить мероприятие</button>
+                </form>
+            </div>
+        {% elif list %}
+            <form class="d-flex" role="search" method="post">
+                {% csrf_token %}
+                <input class="form-control me-2" type="search" placeholder="Название мероприятие " name="events">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+                <a class="djdt-width-20 btn btn-primary btn-lg" style="margin-left: 10px"
+                   href="{% url 'list_events' %}">Сброс</a>
+            </form>
+            {% for model in models %}
+                <div class="d-flex bd-highlight mb-3" style="margin-left: 100px">
+                    <div class="p-2 bd-highlight">
+                        <img src="{{ model.photo.url }}" alt="фото студента" width="250px" height="150px">
+                    </div>
+                    <div class="p-2 bd-highlight">
+                        <a href="{% url 'detail_events' model.pk %}" class="h2 style-href">{{ model.name }}</a>
+                        <p class="h3">{{ model.text|truncatewords:50 }}</p>
+                        <p class="h3">{{ model.date }} {{ model.time }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+            <ul class="pagination" style="margin-left: 600px">
+                {% for page in model.paginator.page_range %}
+                    <li class="page-item">
+                        <a href="?page={{ page }}" class="page-link">{{ i }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <ul class="pagination" style="margin-left: 600px">
+            {% for i in models.paginator.page_range %}
+                <li class="page-item">
+                    <a href="?page={{ i }}" class="page-link">{{ i }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

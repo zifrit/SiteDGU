@@ -7,7 +7,7 @@
                 <img src="{{ student.photo_student.url }}" alt="фото студента" width="350px" height="250px"
                      class="photostudent">
             </div>
-            <h3 class="infostudent">ФИО: <span style="color: ">{{ student.get_full_name }}</span></h3>
+            <h3 class="infostudent">ФИО: <span>{{ student.get_full_name }}</span></h3>
             <h3 class="infostudent">Статус студента: <span>{{ student.student_status }}</span></h3>
             <h3 class="infostudent">Курс: <span>{{ student.get_course_display }}</span></h3>
             <h3 class="infostudent">Направление: <span>{{ student.direction }}</span></h3>
@@ -17,8 +17,7 @@
                 <h3 class="infostudent">Социальная справка: <span>нету</span></h3>
             {% endif %}
             <h3 class="infostudent">Направление: <a href="{{ student.photo_social_reference.url }}"
-                                                    style="color: #46b4e3; text-decoration: none;">Социальная
-                справка</a></h3>
+                                                    style="color: #46b4e3; text-decoration: none;">Социальная справка</a></h3>
             <h3 class="infostudent">Направление: <span>{{ student.direction }}</span></h3>
 
         {% elif request.user.roles == 'T' %}

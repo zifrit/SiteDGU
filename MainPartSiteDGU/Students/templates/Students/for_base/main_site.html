@@ -2,10 +2,12 @@
 {% block content %}
     <div class="container">
         {% if request.user.roles != "S" %}
-            <form class="d-flex" role="search">
+            <form class="d-flex" role="search" method="post">
                 {% csrf_token %}
-                <input class="form-control me-2" type="search" placeholder="ФИО стулента">
+                <input class="form-control me-2" type="search" placeholder="ФИО студента" name="FIO">
                 <button class="btn btn-outline-success" type="submit">Search</button>
+                <a class="djdt-width-20 btn btn-primary btn-lg" style="margin-left: 10px"
+                   href="{% url 'list_students' %}">Сброс</a>
             </form>
             {% for i in model %}
                 <div class="d-flex bd-highlight mb-3" style="margin-left: 100px">

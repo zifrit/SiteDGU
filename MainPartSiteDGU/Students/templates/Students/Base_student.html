@@ -11,8 +11,8 @@
 <body>
 <div class="container">
     <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between">
-        <a href="/" class="">
-            <img src="http://iit.dgu.ru/icons/index/logo.svg" alt="logo" class="header_img">
+        <a href="/list_events" class="">
+            <img src="{% static 'icon/logo.png' %}" alt="logo" style="width: 60px; height: 60px">
         </a>
         <ul class="hr">
             {% if request.user.roles == "S" %}
@@ -42,6 +42,7 @@
             </div>
         {% endif %}
     </header>
+    <hr class="my-4">
 </div>
 {% block content %}
 {% endblock %}
@@ -49,9 +50,8 @@
     <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
         <p class="col-md-4 mb-0 text-muted">© 2022 Company, Inc</p>
 
-        <a href="/"
-           class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-            <img src="http://iit.dgu.ru/icons/index/logo.svg" alt="logo" class="header_img">
+        <a href="/list_events" class="">
+            <img src="{% static 'icon/logo.png' %}" alt="logo" style="width: 60px; height: 60px">
         </a>
 
         <ul class="nav col-md-4 justify-content-end">

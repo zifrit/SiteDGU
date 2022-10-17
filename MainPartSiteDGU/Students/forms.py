@@ -59,9 +59,10 @@ class FormAdvancedRegisterStudent(forms.ModelForm):
 class FormFullRegisterStudent(forms.ModelForm):
     class Meta:
         model = InfoStudent
-        fields = '__all__'
+        fields = ('surname', 'name', 'middle_name', 'direction', 'course', 'student_status', 'photo_student',
+                  'photo_social_reference', 'start_social_reference', 'end_social_reference', 'organization',
+                  'organization_sector',)
         widgets = {
-            # 'name': forms.TextInput(attrs={'class': 'form-control', 'readonly': 'readonly'}),
             'name': forms.TextInput(attrs={'class': 'form-control'}),
             'surname': forms.TextInput(attrs={'class': 'form-control'}),
             'middle_name': forms.TextInput(attrs={'class': 'form-control'}),
@@ -107,3 +108,29 @@ class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = CustomUser
         fields = ('username', 'password1', 'password2',)
+
+
+class DataInput(forms.DateInput):
+    input_type = 'date'
+
+
+class TimeInput(forms.TimeInput):
+    input_type = "time"
+
+
+class FormCreateEvents(forms.ModelForm):
+    class Meta:
+        model = Events
+        # fields = '__all__'
+        fields = ['name', 'text', 'photo', 'date', 'time']
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'text': forms.Textarea(attrs={'class': 'form-control'}),
+            'date': DataInput(),
+            'time': TimeInput(),
+            'photo': forms.FileInput(attrs={'class': 'custom-file-input'}),
+        }
+
+    def clean_date(self):
+        date = self.cleaned_data['date']
+        return date

@@ -12,12 +12,15 @@ from django.views import generic, View
 # permission
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-menu = [{'student': [{'title': "Главная", 'url_name': 'main'}],
-         'teacher': [{'title': "Главная", 'url_name': 'main'},
-                     {'title': "Список студентов ", 'url_name': 'main'},
+menu = [{'student': [{'title': "Главная", 'url_name': 'list_events'},
+                     {'title': "Добавить Мероприятие", 'url_name': 'create_events'}],
+         'teacher': [{'title': "Главная", 'url_name': 'list_events'},
+                     {'title': "Добавить Мероприятие", 'url_name': 'create_events'},
+                     {'title': "Список студентов ", 'url_name': 'list_students'},
                      {'title': "Добавить студента", 'url_name': 'type_reg_student'}],
-         'birds': [{'title': "Главная", 'url_name': 'main'},
-                   {'title': "Список студентов ", 'url_name': 'main'}],
+         'birds': [{'title': "Главная", 'url_name': 'list_events'},
+                   {'title': "Добавить Мероприятие", 'url_name': 'create_events'},
+                   {'title': "Список студентов ", 'url_name': 'list_students'}],
          }]
 
 
@@ -34,6 +37,11 @@ class BaseRegister(LoginRequiredMixin, generic.CreateView):
         context['menu'] = menu
         return context
 
+    def form_valid(self, form):
+        form.instance.full_name = f'{form.cleaned_data["surname"]} {form.cleaned_data["name"]} ' \
+                                  f'{form.cleaned_data["middle_name"]}'
+        return super().form_valid(form)
+
 
 class AdvancedRegisterStudent(BaseRegister):
     form_class = FormAdvancedRegisterStudent
@@ -48,7 +56,7 @@ class Login(LoginView):
     template_name = 'Students/for_base/login.html'
 
     def get_success_url(self):
-        return reverse_lazy('main')
+        return reverse_lazy('list_students')
 
 
 class Register(generic.CreateView):
@@ -56,7 +64,7 @@ class Register(generic.CreateView):
     template_name = 'Students/for_base/login.html'
 
     def get_success_url(self):
-        return reverse_lazy('main')
+        return reverse_lazy('list_students')
 
 
 def logout_system(request):
@@ -64,27 +72,23 @@ def logout_system(request):
     return redirect('login')
 
 
-class Main(LoginRequiredMixin, View):
+class ListStudent(LoginRequiredMixin, View):
     login_url = 'login'
 
     def get(self, request):
-        model = InfoStudent.objects.all()
+        model = InfoStudent.objects.all().select_related('direction')
         paginator = Paginator(model, 5)
         page_number = request.GET.get('page')
         page_ogj = paginator.get_page(page_number)
         return render(request, "Students/for_base/main_site.html", {'model': page_ogj, 'menu': menu})
 
-
-# class DetailStudent(LoginRequiredMixin, DetailView):
-#     login_url = 'login'
-#     model = InfoStudent
-#     template_name = 'Students/for_base/detail_student.html'
-#     context_object_name = 'student'
-#
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['menu'] = menu
-#         return context
+    def post(self, request):
+        search = request.POST['FIO']
+        model = InfoStudent.objects.filter(full_name__contains=search).select_related('direction')
+        paginator = Paginator(model, 5)
+        page_number = request.GET.get('page')
+        page_ogj = paginator.get_page(page_number)
+        return render(request, "Students/for_base/main_site.html", {'model': page_ogj, 'menu': menu})
 
 
 class DetailStudent(LoginRequiredMixin, View):
@@ -104,35 +108,62 @@ class DetailStudent(LoginRequiredMixin, View):
                       {'form': form, 'student': model, 'menu': menu, 'pk': pk})
 
 
-#
-# class RegisterS(View) :
-#
-#     def get(self, request):
-#         form = AddNewStudent()
-#         return render(request, "Students/for_base/add_student.html", {'form': form, 'data': 'привет'})
-#
-#     def post(self, request):
-#         form = AddNewStudent(request.POST, request.FILES)
-#
-#         if form.is_valid():
-#             print('yes')
-#             print(form.cleaned_data)
-#             form.save()
-#         print('no')
-#         print(form.cleaned_data)
-#         error = [equals for _, one in form.errors.items() for equals in one]
-#         print(form.errors.items())
-#         form = AddNewStudent()
-#         return render(request, "Students/for_base/add_student.html", {'form': form, 'data': 'привет',
-#                                                                       'error': error})
-
-# def form_valid(self, form):
-#     form = form.save()
-#     return redirect('home')
-
 class TypeRegisterStudent(LoginRequiredMixin, View):
     login_url = 'login'
 
     def get(self, request):
         but = [('Базовая', 'base_register'), ('Расширенная', 'advanced_register'), ('Полная', 'full_register')]
         return render(request, 'Students/for_base/add_student.html', {'but': but, 'reg': True, 'menu': menu})
+
+
+class CreateEvents(LoginRequiredMixin, generic.CreateView):
+    login_url = 'login'
+    form_class = FormCreateEvents
+    template_name = 'Students/for_base/create_events.html'
+    success_url = '/create_events/'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['menu'] = menu
+        context['list'] = False
+        return context
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+
+class ListEvents(LoginRequiredMixin, View):
+    def get(self, request):
+        model = Events.objects.all()
+        paginator = Paginator(model, 5)
+        page_number = request.GET.get('page')
+        page_ogj = paginator.get_page(page_number)
+
+        return render(request, "Students/for_base/create_events.html", {'models': page_ogj, 'menu': menu, 'list': True})
+
+    def post(self, request):
+        search = request.POST['events']
+        model = Events.objects.filter(name__contains=search)
+        paginator = Paginator(model, 5)
+        page_number = request.GET.get('page')
+        page_ogj = paginator.get_page(page_number)
+
+        return render(request, "Students/for_base/create_events.html", {'models': page_ogj, 'menu': menu, 'list': True})
+
+
+class DetailEvent(LoginRequiredMixin, View):
+
+    def get(self, request, pk):
+        model = Events.objects.get(id=pk)
+        form = FormCreateEvents(instance=model)
+        return render(request, 'Students/for_base/detail_events.html',
+                      {'form': form, 'events': model, 'menu': menu, 'pk': pk})
+
+    def post(self, request, pk):
+        model = Events.objects.get(id=pk)
+        form = FormCreateEvents(request.POST, request.FILES, instance=model)
+        if form.is_valid():
+            form.save()
+        return render(request, 'Students/for_base/detail_events.html',
+                      {'form': form, 'events': model, 'menu': menu, 'pk': pk})

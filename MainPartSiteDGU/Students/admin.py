@@ -10,7 +10,6 @@ admin.site.register(TypeDirection)
 # admin.site.register(CustomUser, UserAdmin)
 # admin.site.register(Events)
 admin.site.register(OrganizationSector)
-admin.site.register(PersonalRoles)
 
 
 # admin.site.register(Test)

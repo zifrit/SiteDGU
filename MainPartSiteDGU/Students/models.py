@@ -1,7 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
-
 # Create your models here.
 
 # def directory_path(instance, filename):
@@ -26,22 +25,12 @@ class CustomUser(AbstractUser):
         return f'{self.username}'
 
 
-class PersonalRoles(models.Model):
-    name = models.CharField(verbose_name='Роли', max_length=255, )
-
-    class Meta:
-        db_table = 'PersonalRoles'
-
-    def __str__(self):
-        return self.name
-
-
 class InfoStudent(models.Model):
+    surname = models.CharField(max_length=255, verbose_name='Фамилия')
     name = models.CharField(max_length=255, verbose_name='Имя')
-    last_name = models.CharField(max_length=255, verbose_name='Фамилия')
     middle_name = models.CharField(max_length=255, verbose_name='Отчество')
-
-    direction = models.ForeignKey(to='Students.TypeDirection', verbose_name='Направление', on_delete=models.CASCADE,
+    full_name = models.CharField(max_length=255, verbose_name='ФОИ', blank=True)
+    direction = models.ForeignKey(to='TypeDirection', verbose_name='Направление', on_delete=models.CASCADE,
                                   default=1)
     TYPE_STATUS = (
         ('1', '1-курс'),
@@ -56,15 +45,14 @@ class InfoStudent(models.Model):
         ('4-1', '4-курс-академ'),
     )
     course = models.CharField(choices=TYPE_STATUS, verbose_name='курс', default='1', max_length=3)
-    student_status = models.ForeignKey(to='Students.StatusStudent', verbose_name='статус студента',
-                                       on_delete=models.CASCADE, default=1)
+    student_status = models.ForeignKey(to='StatusStudent', verbose_name='статус студента',
+                                       on_delete=models.SET_NULL, default=1, null=True)
     photo_student = models.FileField(upload_to='photo/%Y/%m.%d/', verbose_name='фото студента',
                                      default='default_img/default.png', )
     photo_social_reference = models.FileField(upload_to='social_reference/', verbose_name='Социальная справка',
                                               default='default_img/default.png', )
-    start_social_reference = models.CharField(verbose_name='дата назначения справки', max_length=255, blank=True)
-    end_social_reference = models.CharField(verbose_name='дата завершения действия справки', max_length=255,
-                                            blank=True)
+    start_social_reference = models.DateField(verbose_name='дата назначения справки', blank=True, null=True)
+    end_social_reference = models.DateField(verbose_name='дата завершения действия справки', blank=True, null=True)
 
     ORGANIZATION = (
         ('К', 'КДМ'),
@@ -75,8 +63,8 @@ class InfoStudent(models.Model):
     organization = models.CharField(choices=ORGANIZATION, verbose_name='организация', max_length=1, default='О')
     organization_sector = models.ForeignKey(to='OrganizationSector', verbose_name='Сектор организации',
                                             on_delete=models.SET_NULL, null=True)
-    time_create = models.DateTimeField(auto_now_add=True, verbose_name='дата создания',)
-    time_update = models.DateTimeField(auto_now=True, verbose_name='дата изменения',)
+    time_create = models.DateTimeField(auto_now_add=True, verbose_name='дата создания', )
+    time_update = models.DateTimeField(auto_now=True, verbose_name='дата изменения', )
 
     class Meta:
         db_table = 'InfoStudent'
@@ -116,6 +104,21 @@ class OrganizationSector(models.Model):
 
     class Meta:
         db_table = 'OrganizationSector'
+
+    def __str__(self):
+        return self.name
+
+
+class Events(models.Model):
+    name = models.CharField(max_length=255, verbose_name='Название мероприятия')
+    photo = models.FileField(upload_to='Events/%Y/%m.%d/', verbose_name='Фото мероприятия')
+    text = models.TextField(verbose_name='текст', blank=True)
+    date = models.DateField(verbose_name='Дата мероприятия', blank=True, null=True)
+    time = models.TimeField(verbose_name='Время мероприятия', blank=True, null=True)
+    user = models.ForeignKey(to='CustomUser', verbose_name='Кто добавил', on_delete=models.CASCADE, null=True)
+
+    class Meta:
+        db_table = 'Events'
 
     def __str__(self):
         return self.name

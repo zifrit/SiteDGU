@@ -1,0 +1,38 @@
+{% extends 'Students/Base_student.html' %}
+
+{% block content %}
+    <div class="container">
+        <form action="." method="post" enctype="multipart/form-data">
+            {% if events.user == request.user %}
+                <div class="detailstudent">
+                    <a href="{{ events.photo.url }}">
+                        <img src="{{ events.photo.url }}" alt="фото студента" width="350px" height="250px"
+                             class="photostudent"></a>
+                </div>
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div style="display: flex; flex-direction: row; width: 700px; margin: 0 auto">
+                    <button class="w-100 btn btn-primary btn-lg" style="margin-right: 10px" type="submit">Отредактировать</button>
+                    <a class="w-100 btn btn-primary btn-lg" style="margin-left: 10px" href="{% url 'list_events' %}">Назад</a>
+                </div>
+                </form>
+            {% elif request.user.roles == 'B' %}
+                <form action="." method="post" enctype="multipart/form-data">
+                    <div class="detailstudent">
+                        <img src="{{ student.photo_student.url }}" alt="фото  мероприятия" width="350px" height="250px"
+                             class="photostudent">
+                        <a href="{{ student.photo_social_reference.url }}"><img
+                                src="{{ student.photo_social_reference.url }}" alt="фото студента"
+                                width="350px" height="250px"
+                                class="photostudent"></a>
+                    </div>
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    {#                    <input type="submit" value="Изменить" class="w-100 btn btn-primary btn-lg">#}
+                </form>
+            {% else %}
+                vdfsvdsfv
+            {% endif %}
+    </div>
+
+{% endblock %}
