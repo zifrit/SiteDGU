@@ -22,7 +22,11 @@ from . import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('Students.urls')),
+    path('api/', include('Api.urls')),
     path('__debug__/', include('debug_toolbar.urls')),
+    path('auth/', include('djoser.urls')),
+    path('auth/', include('djoser.urls.jwt')),
+    path('drf_auth/', include('rest_framework.urls')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

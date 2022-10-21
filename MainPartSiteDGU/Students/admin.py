@@ -1,3 +1,7 @@
+from django.urls import reverse
+from django.utils.html import format_html
+from django.utils.http import urlencode
+
 from django.contrib import admin
 from .models import *
 from django.contrib.auth.admin import UserAdmin
@@ -38,3 +42,17 @@ class AdminInfoStudent(admin.ModelAdmin):
 class AdminEvents(admin.ModelAdmin):
     list_display = ['name', 'id', 'date']
     list_filter = ['date']
+
+
+# @admin.register(Events)
+# class CourseAdmin(admin.ModelAdmin):
+#     list_display = ("name", "date", "view_students_link")
+#
+#     def view_students_link(self, obj):
+#         count = obj.customuser_set.count()
+#         url = (
+#                 reverse("admin:core_person_changelist")
+#                 + "?"
+#                 + urlencode({"courses__id": f"{obj.id}"})
+#         )
+#         return format_html('<a href="{}">{} Students</a>', url, count)

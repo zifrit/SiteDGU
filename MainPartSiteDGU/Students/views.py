@@ -5,12 +5,14 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import DetailView
 
-from .models import *
+import logging
 from .forms import *
 from django.views import generic, View
 
 # permission
 from django.contrib.auth.mixins import LoginRequiredMixin
+
+log = logging.getLogger('my_log')
 
 menu = [{'student': [{'title': "Главная", 'url_name': 'list_events'},
                      {'title': "Добавить Мероприятие", 'url_name': 'create_events'}],
@@ -75,7 +77,14 @@ def logout_system(request):
 class ListStudent(LoginRequiredMixin, View):
     login_url = 'login'
 
+    # log.info('saaas')
+
     def get(self, request):
+        log_message = {
+            'message': 'dssd',
+            'who': self.request.user
+        }
+        log.info(log_message)
         model = InfoStudent.objects.all().select_related('direction')
         paginator = Paginator(model, 5)
         page_number = request.GET.get('page')
