@@ -15,7 +15,7 @@
                 </form>
             </div>
         {% elif list %}
-            <form class="d-flex" role="search" method="post">
+            <form class="d-flex" role="search" method="post" action="">
                 {% csrf_token %}
                 <input class="form-control me-2" type="search" placeholder="Название мероприятие " name="events">
                 <button class="btn btn-outline-success" type="submit">Search</button>

@@ -1278,3 +1278,166 @@ TypeError: list.count() takes exactly one argument (0 given)
 [21/Oct/2022 14:40:40,801] Watching for file changes with StatReloader autoreload.py INFO
 [21/Oct/2022 14:43:33,678] /Users/radix-dev/PycharmProjects/dgu/MainPartSiteDGU/MainPartSiteDGU/settings.py changed, reloading. autoreload.py INFO
 [21/Oct/2022 14:44:23,764] Watching for file changes with StatReloader autoreload.py INFO
+[24/Oct/2022 10:01:58,669] Watching for file changes with StatReloader autoreload.py INFO
+[24/Oct/2022 10:02:07,677] [35;1mInternal Server Error: /api/test/[0m log.py ERROR
+Traceback (most recent call last):
+  File "/Users/radix-dev/PycharmProjects/dgu/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/Users/radix-dev/PycharmProjects/dgu/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/radix-dev/PycharmProjects/dgu/venv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/Users/radix-dev/PycharmProjects/dgu/venv/lib/python3.10/site-packages/django/views/generic/base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Users/radix-dev/PycharmProjects/dgu/venv/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/radix-dev/PycharmProjects/dgu/venv/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/radix-dev/PycharmProjects/dgu/venv/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/radix-dev/PycharmProjects/dgu/venv/lib/python3.10/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+TypeError: test.get() takes 1 positional argument but 2 were given
+[24/Oct/2022 10:02:07] [35;1m"GET /api/test/ HTTP/1.1" 500 96332[0m basehttp.py ERROR
+[24/Oct/2022 10:02:07] [36m"GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 304 0[0m basehttp.py INFO
+[24/Oct/2022 10:02:07] [36m"GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 304 0[0m basehttp.py INFO
+[24/Oct/2022 10:02:07] [36m"GET /static/debug_toolbar/css/print.css HTTP/1.1" 304 0[0m basehttp.py INFO
+[24/Oct/2022 10:02:07] [36m"GET /static/debug_toolbar/js/utils.js HTTP/1.1" 304 0[0m basehttp.py INFO
+[24/Oct/2022 10:03:01,451] [33mNot Found: /[0m log.py WARNING
+[24/Oct/2022 10:03:01] [33m"GET / HTTP/1.1" 404 15831[0m basehttp.py WARNING
+[24/Oct/2022 10:03:05,032] [35;1mInternal Server Error: /api/test/[0m log.py ERROR
+Traceback (most recent call last):
+  File "/Users/radix-dev/PycharmProjects/dgu/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/Users/radix-dev/PycharmProjects/dgu/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/radix-dev/PycharmProjects/dgu/venv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/Users/radix-dev/PycharmProjects/dgu/venv/lib/python3.10/site-packages/django/views/generic/base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Users/radix-dev/PycharmProjects/dgu/venv/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/radix-dev/PycharmProjects/dgu/venv/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/radix-dev/PycharmProjects/dgu/venv/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/radix-dev/PycharmProjects/dgu/venv/lib/python3.10/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+TypeError: test.get() takes 1 positional argument but 2 were given
+[24/Oct/2022 10:03:05] [35;1m"GET /api/test/ HTTP/1.1" 500 95982[0m basehttp.py ERROR
+[24/Oct/2022 10:03:10,125] [35;1mInternal Server Error: /api/test/[0m log.py ERROR
+Traceback (most recent call last):
+  File "/Users/radix-dev/PycharmProjects/dgu/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/Users/radix-dev/PycharmProjects/dgu/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/radix-dev/PycharmProjects/dgu/venv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/Users/radix-dev/PycharmProjects/dgu/venv/lib/python3.10/site-packages/django/views/generic/base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Users/radix-dev/PycharmProjects/dgu/venv/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/radix-dev/PycharmProjects/dgu/venv/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/radix-dev/PycharmProjects/dgu/venv/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/radix-dev/PycharmProjects/dgu/venv/lib/python3.10/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+TypeError: test.get() takes 1 positional argument but 2 were given
+[24/Oct/2022 10:03:10] [35;1m"GET /api/test/ HTTP/1.1" 500 96113[0m basehttp.py ERROR
+[24/Oct/2022 10:03:41,981] /Users/radix-dev/PycharmProjects/dgu/MainPartSiteDGU/Api/urls.py changed, reloading. autoreload.py INFO
+[24/Oct/2022 10:03:42,496] Watching for file changes with StatReloader autoreload.py INFO
+[24/Oct/2022 10:03:45] [32m"GET /list_students/ HTTP/1.1" 302 0[0m basehttp.py INFO
+[24/Oct/2022 10:03:45] [m"GET /login/?next=/list_students/ HTTP/1.1" 200 13805[0m basehttp.py INFO
+[24/Oct/2022 10:03:45] [36m"GET /static/css/style.css HTTP/1.1" 304 0[0m basehttp.py INFO
+[24/Oct/2022 10:03:45] [36m"GET /static/icon/logo.png HTTP/1.1" 304 0[0m basehttp.py INFO
+[24/Oct/2022 10:03:52] [32m"POST /login/ HTTP/1.1" 302 0[0m basehttp.py INFO
+[24/Oct/2022 10:03:52] [m"GET /list_students/ HTTP/1.1" 200 16980[0m basehttp.py INFO
+[24/Oct/2022 10:03:53] [m"GET /media/photo/2022/10.17/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA_%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2022-08-12_%D0%B2_16.29.39.png HTTP/1.1" 200 6052[0m basehttp.py INFO
+[24/Oct/2022 10:03:53] [m"GET /media/photo/2022/10.17/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA_%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2022-08-16_%D0%B2_14.56.56.png HTTP/1.1" 200 288574[0m basehttp.py INFO
+[24/Oct/2022 10:03:53] [m"GET /media/photo/2022/10.17/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA_%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2022-08-16_%D0%B2_14.56.39.png HTTP/1.1" 200 282542[0m basehttp.py INFO
+[24/Oct/2022 10:03:53] [m"GET /media/photo/2022/10.17/LWScreenShot_2022-09-02_at_17.30.40.png HTTP/1.1" 200 23927349[0m basehttp.py INFO
+[24/Oct/2022 10:03:58] [m"GET /list_students/ HTTP/1.1" 200 16980[0m basehttp.py INFO
+[24/Oct/2022 10:04:01] [m"GET /list_students/ HTTP/1.1" 200 16980[0m basehttp.py INFO
+[24/Oct/2022 10:04:05] [m"GET /detail_student/1/ HTTP/1.1" 200 18009[0m basehttp.py INFO
+[24/Oct/2022 10:04:05] [m"GET /media/default_img/default.png HTTP/1.1" 200 328529[0m basehttp.py INFO
+[24/Oct/2022 10:04:09] [m"GET /__debug__/render_panel/?store_id=334cf647b76c413abba0372724e0f9be&panel_id=SQLPanel HTTP/1.1" 200 187814[0m basehttp.py INFO
+[24/Oct/2022 10:04:52,936] /Users/radix-dev/PycharmProjects/dgu/MainPartSiteDGU/Students/views.py changed, reloading. autoreload.py INFO
+[24/Oct/2022 10:04:53,341] Watching for file changes with StatReloader autoreload.py INFO
+[24/Oct/2022 10:05:08] [m"GET /detail_student/1/ HTTP/1.1" 200 18007[0m basehttp.py INFO
+[24/Oct/2022 10:05:10] [m"GET /__debug__/render_panel/?store_id=d074ead7ff994dc38574977b6876b2c2&panel_id=SQLPanel HTTP/1.1" 200 187802[0m basehttp.py INFO
+[24/Oct/2022 10:05:19,985] /Users/radix-dev/PycharmProjects/dgu/MainPartSiteDGU/Students/views.py changed, reloading. autoreload.py INFO
+[24/Oct/2022 10:05:20,843] Watching for file changes with StatReloader autoreload.py INFO
+[24/Oct/2022 10:05:37,719] /Users/radix-dev/PycharmProjects/dgu/MainPartSiteDGU/Students/views.py changed, reloading. autoreload.py INFO
+[24/Oct/2022 10:05:38,303] Watching for file changes with StatReloader autoreload.py INFO
+[24/Oct/2022 10:05:44] [m"GET /detail_student/1/ HTTP/1.1" 200 18007[0m basehttp.py INFO
+[24/Oct/2022 10:05:46] [m"GET /__debug__/render_panel/?store_id=e1a7a0990f6641f095cfefec819090e8&panel_id=SQLPanel HTTP/1.1" 200 187818[0m basehttp.py INFO
+[24/Oct/2022 10:05:57] [m"GET /detail_student/1/ HTTP/1.1" 200 18007[0m basehttp.py INFO
+[24/Oct/2022 10:06:05,608] /Users/radix-dev/PycharmProjects/dgu/MainPartSiteDGU/Students/views.py changed, reloading. autoreload.py INFO
+[24/Oct/2022 10:06:06,358] Watching for file changes with StatReloader autoreload.py INFO
+[27/Oct/2022 14:33:47] [32m"GET /detail_student/1/ HTTP/1.1" 302 0[0m basehttp.py INFO
+[27/Oct/2022 14:33:47,951] [33mNot Found: /accounts/login/[0m log.py WARNING
+[27/Oct/2022 14:33:47] [33m"GET /accounts/login/?next=/detail_student/1/ HTTP/1.1" 404 15957[0m basehttp.py WARNING
+[27/Oct/2022 14:33:48] [m"GET /api/list_students/ HTTP/1.1" 200 17148[0m basehttp.py INFO
+[27/Oct/2022 14:33:48] [36m"GET /static/rest_framework/css/prettify.css HTTP/1.1" 304 0[0m basehttp.py INFO
+[27/Oct/2022 14:33:48] [36m"GET /static/rest_framework/css/default.css HTTP/1.1" 304 0[0m basehttp.py INFO
+[27/Oct/2022 14:33:48] [36m"GET /static/rest_framework/js/csrf.js HTTP/1.1" 304 0[0m basehttp.py INFO
+[27/Oct/2022 14:33:48] [m"GET /static/rest_framework/css/bootstrap-tweaks.css HTTP/1.1" 200 3385[0m basehttp.py INFO
+[27/Oct/2022 14:33:48] [m"GET /static/rest_framework/js/ajax-form.js HTTP/1.1" 200 3597[0m basehttp.py INFO
+[27/Oct/2022 14:33:48] [m"GET /static/rest_framework/js/bootstrap.min.js HTTP/1.1" 200 39680[0m basehttp.py INFO
+[27/Oct/2022 14:33:48] [m"GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 11815[0m basehttp.py INFO
+[27/Oct/2022 14:33:48] [m"GET /static/rest_framework/js/jquery-3.5.1.min.js HTTP/1.1" 200 89476[0m basehttp.py INFO
+[27/Oct/2022 14:33:48] [36m"GET /static/rest_framework/js/default.js HTTP/1.1" 304 0[0m basehttp.py INFO
+[27/Oct/2022 14:33:48] [m"GET /static/rest_framework/js/prettify-min.js HTTP/1.1" 200 13632[0m basehttp.py INFO
+[27/Oct/2022 14:33:48] [m"GET /static/rest_framework/css/bootstrap.min.css HTTP/1.1" 200 121457[0m basehttp.py INFO
+[27/Oct/2022 14:33:49] [32m"GET /admin/ HTTP/1.1" 302 0[0m basehttp.py INFO
+[27/Oct/2022 14:33:49] [m"GET /admin/login/?next=/admin/ HTTP/1.1" 200 13252[0m basehttp.py INFO
+[02/Nov/2022 13:14:22,621] Watching for file changes with StatReloader autoreload.py INFO
+[02/Nov/2022 13:14:24,319] [33mNot Found: /[0m log.py WARNING
+[02/Nov/2022 13:14:24] [33m"GET / HTTP/1.1" 404 15832[0m basehttp.py WARNING
+[02/Nov/2022 13:14:24,554] [33mNot Found: /[0m log.py WARNING
+[02/Nov/2022 13:14:24] [33m"GET / HTTP/1.1" 404 15831[0m basehttp.py WARNING
+[02/Nov/2022 13:14:24] [m"GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 11815[0m basehttp.py INFO
+[02/Nov/2022 13:14:25] [m"GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43[0m basehttp.py INFO
+[02/Nov/2022 13:14:25] [m"GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 12222[0m basehttp.py INFO
+[02/Nov/2022 13:14:25] [m"GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4479[0m basehttp.py INFO
+[02/Nov/2022 13:14:26,719] [33mNot Found: /favicon.ico[0m log.py WARNING
+[02/Nov/2022 13:14:26] [33m"GET /favicon.ico HTTP/1.1" 404 15893[0m basehttp.py WARNING
+[02/Nov/2022 13:14:26,746] [33mNot Found: /favicon.ico[0m log.py WARNING
+[02/Nov/2022 13:14:26] [33m"GET /favicon.ico HTTP/1.1" 404 15893[0m basehttp.py WARNING
+[02/Nov/2022 13:14:56] [32m"GET /list_students/ HTTP/1.1" 302 0[0m basehttp.py INFO
+[02/Nov/2022 13:14:56] [m"GET /login/?next=/list_students/ HTTP/1.1" 200 13805[0m basehttp.py INFO
+[02/Nov/2022 13:14:56] [m"GET /static/icon/logo.png HTTP/1.1" 200 513410[0m basehttp.py INFO
+[02/Nov/2022 13:14:56] [m"GET /static/css/style.css HTTP/1.1" 200 1895[0m basehttp.py INFO
+[02/Nov/2022 13:15:01] [32m"POST /login/ HTTP/1.1" 302 0[0m basehttp.py INFO
+[02/Nov/2022 13:15:01] [m"GET /list_students/ HTTP/1.1" 200 16980[0m basehttp.py INFO
+[02/Nov/2022 13:15:01] [m"GET /media/photo/2022/10.17/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA_%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2022-08-16_%D0%B2_14.56.56.png HTTP/1.1" 200 288574[0m basehttp.py INFO
+[02/Nov/2022 13:15:01] [m"GET /media/photo/2022/10.17/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA_%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2022-08-12_%D0%B2_16.29.39.png HTTP/1.1" 200 6052[0m basehttp.py INFO
+[02/Nov/2022 13:15:01] [m"GET /media/photo/2022/10.17/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA_%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2022-08-16_%D0%B2_14.56.39.png HTTP/1.1" 200 282542[0m basehttp.py INFO
+[02/Nov/2022 13:15:02] [m"GET /media/photo/2022/10.17/LWScreenShot_2022-09-02_at_17.30.40.png HTTP/1.1" 200 23927349[0m basehttp.py INFO
+[18/Nov/2022 12:59:20,060] Watching for file changes with StatReloader autoreload.py INFO
+[18/Nov/2022 12:59:21,809] [33mNot Found: /[0m log.py WARNING
+[18/Nov/2022 12:59:21] [33m"GET / HTTP/1.1" 404 15831[0m basehttp.py WARNING
+[18/Nov/2022 12:59:22] [m"GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 12222[0m basehttp.py INFO
+[18/Nov/2022 12:59:22] [m"GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 11815[0m basehttp.py INFO
+[18/Nov/2022 12:59:22] [m"GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43[0m basehttp.py INFO
+[18/Nov/2022 12:59:22] [m"GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4479[0m basehttp.py INFO
+[18/Nov/2022 12:59:23,711] [33mNot Found: /favicon.ico[0m log.py WARNING
+[18/Nov/2022 12:59:23] [33m"GET /favicon.ico HTTP/1.1" 404 15893[0m basehttp.py WARNING
+[18/Nov/2022 12:59:29] [m"GET /login/ HTTP/1.1" 200 13784[0m basehttp.py INFO
+[18/Nov/2022 12:59:29] [m"GET /static/css/style.css HTTP/1.1" 200 1895[0m basehttp.py INFO
+[18/Nov/2022 12:59:29] [m"GET /static/icon/logo.png HTTP/1.1" 200 513410[0m basehttp.py INFO
+[18/Nov/2022 12:59:33] [32m"POST /login/ HTTP/1.1" 302 0[0m basehttp.py INFO
+[18/Nov/2022 12:59:33] [m"GET /list_students/ HTTP/1.1" 200 16980[0m basehttp.py INFO
+[18/Nov/2022 12:59:34] [m"GET /media/photo/2022/10.17/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA_%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2022-08-12_%D0%B2_16.29.39.png HTTP/1.1" 200 6052[0m basehttp.py INFO
+[18/Nov/2022 12:59:34] [m"GET /media/photo/2022/10.17/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA_%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2022-08-16_%D0%B2_14.56.56.png HTTP/1.1" 200 288574[0m basehttp.py INFO
+[18/Nov/2022 12:59:34] [m"GET /media/photo/2022/10.17/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA_%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2022-08-16_%D0%B2_14.56.39.png HTTP/1.1" 200 282542[0m basehttp.py INFO
+[18/Nov/2022 12:59:34] [m"GET /media/photo/2022/10.17/LWScreenShot_2022-09-02_at_17.30.40.png HTTP/1.1" 200 23927349[0m basehttp.py INFO
+[18/Nov/2022 12:59:36] [m"GET /list_events/ HTTP/1.1" 200 17184[0m basehttp.py INFO
+[18/Nov/2022 12:59:36] [m"GET /media/Events/2022/10.13/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA_%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2022-08-16_%D0%B2_14.56.56_hYLxXrv.png HTTP/1.1" 200 288574[0m basehttp.py INFO
+[18/Nov/2022 12:59:36] [m"GET /media/Events/2022/10.13/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA_%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2022-08-16_%D0%B2_14.56.56_Cnp9lwP.png HTTP/1.1" 200 288574[0m basehttp.py INFO
+[18/Nov/2022 12:59:36] [m"GET /media/Events/2022/10.17/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA_%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2022-08-16_%D0%B2_14.56.39.png HTTP/1.1" 200 282542[0m basehttp.py INFO
+[18/Nov/2022 12:59:36] [m"GET /media/Events/2022/10.13/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA_%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2022-08-16_%D0%B2_14.56.56_WAty4Ft.png HTTP/1.1" 200 288574[0m basehttp.py INFO
+[18/Nov/2022 12:59:37] [m"GET /create_events/ HTTP/1.1" 200 15321[0m basehttp.py INFO
+[18/Nov/2022 12:59:38] [m"GET /list_students/ HTTP/1.1" 200 16980[0m basehttp.py INFO
+[18/Nov/2022 12:59:40] [m"GET /type_reg_student/ HTTP/1.1" 200 13860[0m basehttp.py INFO
