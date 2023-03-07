@@ -112,9 +112,9 @@ class OrganizationSector(models.Model):
 class Events(models.Model):
     name = models.CharField(max_length=255, verbose_name='Название мероприятия')
     photo = models.FileField(upload_to='Events/%Y/%m.%d/', verbose_name='Фото мероприятия')
-    text = models.TextField(verbose_name='текст', blank=True)
-    date = models.DateField(verbose_name='Дата мероприятия', blank=True, null=True)
-    time = models.TimeField(verbose_name='Время мероприятия', blank=True, null=True)
+    text = models.TextField(verbose_name='текст')
+    date = models.DateField(verbose_name='Дата мероприятия')
+    time = models.TimeField(verbose_name='Время мероприятия')
     user = models.ForeignKey(to='CustomUser', verbose_name='Кто добавил', on_delete=models.CASCADE, null=True)
 
     class Meta:

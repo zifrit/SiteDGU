@@ -3,36 +3,51 @@
 {% block content %}
     <div class="container">
         <form action="." method="post" enctype="multipart/form-data">
-            {% if events.user == request.user %}
-                <div class="detailstudent">
-                    <a href="{{ events.photo.url }}">
-                        <img src="{{ events.photo.url }}" alt="фото студента" width="350px" height="250px"
-                             class="photostudent"></a>
+            {% csrf_token %}
+            {% if not edit %}
+                <div class="detail-event">
+                    <a href="{{ ditail_event.photo.url }}">
+                        <img src="{{ ditail_event.photo.url }}" alt="фото мероприятия" width="350px" height="250px"
+                             class="photo-event"></a>
                 </div>
-                {% csrf_token %}
-                {{ form.as_p }}
-                <div style="display: flex; flex-direction: row; width: 700px; margin: 0 auto">
-                    <button class="w-100 btn btn-primary btn-lg" style="margin-right: 10px" type="submit">Отредактировать</button>
-                    <a class="w-100 btn btn-primary btn-lg" style="margin-left: 10px" href="{% url 'list_events' %}">Назад</a>
+                <h4><p><label class="form-label" style="margin-right: 20px">Название мероприятия:</label>
+                    {{ ditail_event.name }}</p></h4>
+                <h4><p><label class="form-label" style="margin-right: 20px">Описание мероприятия:</label>
+                    {{ ditail_event.text }}</p></h4>
+                <h4><p><label class="form-label" style="margin-right: 20px">Дата мероприятия:</label>
+                    {{ ditail_event.date }}</p></h4>
+                <h4><p><label class="form-label" style="margin-right: 20px">Время мероприятия:</label>
+                    {{ ditail_event.time }}</p></h4>
+            {% elif ditail_event.user == request.user and edit %}
+                <div class="detail-event">
+                    <a href="{{ ditail_event.photo.url }}">
+                        <img src="{{ ditail_event.photo.url }}" alt="фото мероприятия" width="350px" height="250px"
+                             class="photo-event"></a>
                 </div>
-                </form>
-            {% elif request.user.roles == 'B' %}
-                <form action="." method="post" enctype="multipart/form-data">
-                    <div class="detailstudent">
-                        <img src="{{ student.photo_student.url }}" alt="фото  мероприятия" width="350px" height="250px"
-                             class="photostudent">
-                        <a href="{{ student.photo_social_reference.url }}"><img
-                                src="{{ student.photo_social_reference.url }}" alt="фото студента"
-                                width="350px" height="250px"
-                                class="photostudent"></a>
-                    </div>
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    {#                    <input type="submit" value="Изменить" class="w-100 btn btn-primary btn-lg">#}
-                </form>
-            {% else %}
-                vdfsvdsfv
+                {% for f in form %}
+                    <h4><p><label class="form-label" for="{{ f.id_for_label }}"
+                                  style="margin-right: 20px">{{ f.label }}:</label>{{ f }}</p></h4>
+                    <div class="form-error">{{ f.errors }}</div>
+                {% endfor %}
             {% endif %}
+            {% if not edit %}
+                <div style="display: flex; flex-direction: row; width: 700px; margin: 0 auto">
+                    {% if ditail_event.user == request.user %}
+                        <a class="w-100 btn btn-primary btn-lg" style="margin-left: 10px"
+                           href="{% url 'edit_detail_events' pk=ditail_event.id %}">Отредактировать</a>
+                    {% endif %}
+                    <a class="w-100 btn btn-primary btn-lg" style="margin-left: 10px"
+                       href="{% url 'list_events' %}">Назад</a>
+                </div>
+            {% elif ditail_event.user == request.user and edit %}
+                <div style="display: flex; flex-direction: row; width: 700px; margin: 0 auto">
+                    <button class="w-100 btn btn-primary btn-lg" style="margin-right: 10px" type="submit">Принять
+                    </button>
+                    <a class="w-100 btn btn-primary btn-lg" style="margin-left: 10px"
+                       href="{% url 'detail_events' pk=ditail_event.id %}">отмена</a>
+                </div>
+            {% endif %}
+        </form>
     </div>
 
 {% endblock %}
