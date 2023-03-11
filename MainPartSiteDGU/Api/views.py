@@ -36,15 +36,13 @@ class MyTokenObtainView(TokenObtainPairView):
 
 
 class PricesPagination(PageNumberPagination):
-    def get_paginated_response(self, data):
-        return Response({
-            'results': data,
-            'count': self.page.paginator.count
-        })
+    page_size = 2
+    page_size_query_param = 'size'
+
 
 
 class ListStudents(generics.ListAPIView):
-    queryset = InfoStudent.objects.all()
+    queryset = ProfileStudent.objects.all()
     pagination_class = PricesPagination
     serializer_class = SerializerListStudents
 
@@ -52,13 +50,13 @@ class ListStudents(generics.ListAPIView):
 
 
 class DitailStudents(generics.RetrieveAPIView):
-    queryset = InfoStudent.objects.all()
+    queryset = ProfileStudent.objects.all()
     serializer_class = SerializerDitailStudents
     # permission_classes = (IsAuthenticated,)
 
 
 class test(APIView):
     def get(self):
-        model = InfoStudent.objects.all()
+        model = ProfileStudent.objects.all()
         s = SerializerDitailStudents(model)
         return Response({'s': s})

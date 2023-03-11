@@ -16,20 +16,21 @@ class CustomUser(AbstractUser):
     )
     roles = models.CharField(choices=ROLES, max_length=2, blank=True,
                              default='S')
-    full_name = models.CharField(max_length=255, verbose_name='FIO', blank=True)
+    middle_name = models.CharField(max_length=255, verbose_name='Отчество', blank=True)
 
     class Meta:
         db_table = 'Dj_CUser'
 
     def __str__(self):
-        return f'{self.username}'
+        return self.get_full_name()
+
+    def get_full_name(self):
+        full_name = '%s %s %s' % (self.first_name, self.last_name, self.middle_name)
+        return full_name.strip()
 
 
-class InfoStudent(models.Model):
-    surname = models.CharField(max_length=255, verbose_name='Фамилия')
-    name = models.CharField(max_length=255, verbose_name='Имя')
-    middle_name = models.CharField(max_length=255, verbose_name='Отчество')
-    full_name = models.CharField(max_length=255, verbose_name='ФОИ', blank=True)
+class ProfileStudent(models.Model):
+    student = models.OneToOneField(to='CustomUser', on_delete=models.CASCADE, verbose_name='Студент')
     direction = models.ForeignKey(to='TypeDirection', verbose_name='Направление', on_delete=models.CASCADE,
                                   default=1)
     TYPE_STATUS = (
@@ -47,7 +48,7 @@ class InfoStudent(models.Model):
     course = models.CharField(choices=TYPE_STATUS, verbose_name='курс', default='1', max_length=3)
     student_status = models.ForeignKey(to='StatusStudent', verbose_name='статус студента',
                                        on_delete=models.SET_NULL, default=1, null=True)
-    photo_student = models.FileField(upload_to='photo/%Y/%m.%d/', verbose_name='фото студента',
+    photo_student = models.FileField(upload_to='photo_student/%Y/%m.%d/', verbose_name='фото студента',
                                      default='default_img/default.png', )
     photo_social_reference = models.FileField(upload_to='social_reference/', verbose_name='Социальная справка',
                                               default='default_img/default.png', )
@@ -67,16 +68,13 @@ class InfoStudent(models.Model):
     time_update = models.DateTimeField(auto_now=True, verbose_name='дата изменения', )
 
     class Meta:
-        db_table = 'InfoStudent'
-
-    def get_full_name(self):
-        return f'{self.surname} {self.name} {self.middle_name}'
+        db_table = 'ProfileStudent'
 
     def get_absolute_url(self):
         return reverse('detail_student', kwargs={'pk': self.pk})
 
     def __str__(self):
-        return f'{self.surname} {self.name}'
+        return f'{self.student.get_full_name()}'
 
 
 class StatusStudent(models.Model):

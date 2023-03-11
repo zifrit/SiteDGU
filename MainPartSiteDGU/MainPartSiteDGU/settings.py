@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import os
 from datetime import timedelta
 from pathlib import Path
+
+from django.urls import reverse_lazy
 from pythonjsonlogger.jsonlogger import JsonFormatter
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 from .json_logger_custom import CustomJsonFormatter
@@ -27,7 +29,7 @@ SECRET_KEY = 'django-insecure-ylskspf5lyxnr_77f(s0&g8qj7=_z*tb3z_77u4^m@xz0pg09k
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -142,6 +144,9 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+
+LOGIN_URL = reverse_lazy('login')
+LOGIN_REDIRECT_URL = reverse_lazy('list_events')
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
@@ -151,50 +156,56 @@ INTERNAL_IPS = [
     "127.0.0.1",
     '10.11.61.29'
 ]
-#
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'formatters': {
-        'django_server': {
-            '()': 'django.utils.log.ServerFormatter',
-            'format': '[{server_time}] {message} {filename} {levelname}',
-            'style': '{',
-        },
-        'json_format': {
-            '()': CustomJsonFormatter,
-        }
-    },
-    'handlers': {
-        'console': {
-            'level': 'INFO',
-            'class': 'logging.StreamHandler',
-            'formatter': 'django_server',
-        },
-        'system_log': {
-            'class': 'logging.FileHandler',
-            'formatter': 'django_server',
-            'filename': 'my_log.log'
-        },
-        'my_log': {
-            'class': 'logging.FileHandler',
-            'formatter': 'json_format',
-            'filename': 'system_log.log'
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['system_log', 'console'],
-            'level': 'INFO',
-            'propagate': False,
-        },
-        'my_log': {
-            'handlers': ['my_log', 'console'],
-            'level': 'INFO',
-            'propagate': True,
-        },
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
     }
 }
+
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'formatters': {
+#         'django_server': {
+#             '()': 'django.utils.log.ServerFormatter',
+#             'format': '[{server_time}] {message} {filename} {levelname}',
+#             'style': '{',
+#         },
+#         'json_format': {
+#             '()': CustomJsonFormatter,
+#         }
+#     },
+#     'handlers': {
+#         'console': {
+#             'level': 'INFO',
+#             'class': 'logging.StreamHandler',
+#             'formatter': 'django_server',
+#         },
+#         'system_log': {
+#             'class': 'logging.FileHandler',
+#             'formatter': 'django_server',
+#             'filename': 'my_log.log'
+#         },
+#         'my_log': {
+#             'class': 'logging.FileHandler',
+#             'formatter': 'json_format',
+#             'filename': 'system_log.log'
+#         },
+#     },
+#     'loggers': {
+#         'django': {
+#             'handlers': ['system_log', 'console'],
+#             'level': 'INFO',
+#             'propagate': False,
+#         },
+#         'my_log': {
+#             'handlers': ['my_log', 'console'],
+#             'level': 'INFO',
+#             'propagate': True,
+#         },
+#     }
+# }
 
 
 REST_FRAMEWORK = {

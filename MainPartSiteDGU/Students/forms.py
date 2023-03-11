@@ -7,14 +7,18 @@ import re
 
 
 class FormBaseRegisterStudent(forms.ModelForm):
+    first_name = forms.CharField(max_length=30, required=False, help_text='Имя', label='Имя',
+                                 widget=forms.TextInput(attrs={'class': 'form-control'}))
+    last_name = forms.CharField(max_length=30, required=False, help_text='Фамилия', label='Фамилия',
+                                widget=forms.TextInput(attrs={'class': 'form-control'}))
+    middle_name = forms.CharField(max_length=30, required=False, help_text='Отчество', label='Отчество',
+                                  widget=forms.TextInput(attrs={'class': 'form-control'}))
+
     class Meta:
-        model = InfoStudent
+        model = ProfileStudent
         # fields = '__all__'
-        fields = ('surname', 'name', 'middle_name', 'direction', 'course', 'photo_student',)
+        fields = ('first_name', 'last_name', 'middle_name', 'direction', 'course', 'photo_student',)
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control'}),
-            'surname': forms.TextInput(attrs={'class': 'form-control'}),
-            'middle_name': forms.TextInput(attrs={'class': 'form-control'}),
             'direction': forms.Select(attrs={'class': 'form-select'}),
             'course': forms.Select(attrs={'class': 'form-select'}),
             'photo_student': forms.FileInput(attrs={'class': 'custom-file-input'}),
@@ -22,15 +26,19 @@ class FormBaseRegisterStudent(forms.ModelForm):
 
 
 class FormAdvancedRegisterStudent(forms.ModelForm):
+    first_name = forms.CharField(max_length=30, required=False, help_text='Имя', label='Имя',
+                                 widget=forms.TextInput(attrs={'class': 'form-control'}))
+    last_name = forms.CharField(max_length=30, required=False, help_text='Фамилия', label='Фамилия',
+                                widget=forms.TextInput(attrs={'class': 'form-control'}))
+    middle_name = forms.CharField(max_length=30, required=False, help_text='Отчество', label='Отчество',
+                                  widget=forms.TextInput(attrs={'class': 'form-control'}))
+
     class Meta:
-        model = InfoStudent
+        model = ProfileStudent
         # fields = '__all__'
-        fields = ('surname', 'name', 'middle_name', 'direction', 'course', 'student_status', 'photo_student',
+        fields = ('first_name', 'last_name', 'middle_name', 'direction', 'course', 'student_status', 'photo_student',
                   'photo_social_reference', 'start_social_reference', 'end_social_reference')
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control'}),
-            'surname': forms.TextInput(attrs={'class': 'form-control'}),
-            'middle_name': forms.TextInput(attrs={'class': 'form-control'}),
             'direction': forms.Select(attrs={'class': 'form-select'}),
             'course': forms.Select(attrs={'class': 'form-select'}),
             'student_status': forms.Select(attrs={'class': 'form-select'}),
@@ -57,15 +65,19 @@ class FormAdvancedRegisterStudent(forms.ModelForm):
 
 
 class FormFullRegisterStudent(forms.ModelForm):
+    first_name = forms.CharField(max_length=30, required=False, help_text='Имя', label='Имя',
+                                 widget=forms.TextInput(attrs={'class': 'form-control'}))
+    last_name = forms.CharField(max_length=30, required=False, help_text='Фамилия', label='Фамилия',
+                                widget=forms.TextInput(attrs={'class': 'form-control'}))
+    middle_name = forms.CharField(max_length=30, required=False, help_text='Отчество', label='Отчество',
+                                  widget=forms.TextInput(attrs={'class': 'form-control'}))
+
     class Meta:
-        model = InfoStudent
-        fields = ('surname', 'name', 'middle_name', 'direction', 'course', 'student_status', 'photo_student',
+        model = ProfileStudent
+        fields = ('first_name', 'last_name', 'middle_name', 'direction', 'course', 'student_status', 'photo_student',
                   'photo_social_reference', 'start_social_reference', 'end_social_reference', 'organization',
                   'organization_sector',)
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control'}),
-            'surname': forms.TextInput(attrs={'class': 'form-control'}),
-            'middle_name': forms.TextInput(attrs={'class': 'form-control'}),
             'direction': forms.Select(attrs={'class': 'form-select'}),
             'course': forms.Select(attrs={'class': 'form-select', 'readonly': 'readonly'}, ),
             'student_status': forms.Select(attrs={'class': 'form-select'}),

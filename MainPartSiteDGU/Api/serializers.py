@@ -12,7 +12,7 @@ class SerializerListStudents(serializers.ModelSerializer):
     days = serializers.SerializerMethodField()
 
     class Meta:
-        model = InfoStudent
+        model = ProfileStudent
         fields = ['full_name', 'course', 'direction', 'days']
 
     def get_days(self, obj):
@@ -26,5 +26,5 @@ class SerializerDitailStudents(serializers.ModelSerializer):
     organization = serializers.CharField(source='get_organization_display')
 
     class Meta:
-        model = InfoStudent
+        model = ProfileStudent
         fields = ['full_name', 'course', 'direction', 'organization', 'student_status']

@@ -28,5 +28,4 @@ urlpatterns = [
     path('auth/', include('djoser.urls.jwt')),
     path('drf_auth/', include('rest_framework.urls')),
 ]
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -2,25 +2,32 @@
 
 {% block content %}
     <div class="container">
-        {% if request.user.roles == "B" %}
+        {% if not edit %}
             <div class="detailstudent">
                 <img src="{{ student.photo_student.url }}" alt="фото студента" width="350px" height="250px"
                      class="photostudent">
             </div>
-            <h3 class="infostudent">ФИО: <span>{{ student.get_full_name }}</span></h3>
+            <h3 class="infostudent">ФИО: <span>{{ student.student.get_full_name }}</span></h3>
             <h3 class="infostudent">Статус студента: <span>{{ student.student_status }}</span></h3>
             <h3 class="infostudent">Курс: <span>{{ student.get_course_display }}</span></h3>
             <h3 class="infostudent">Направление: <span>{{ student.direction }}</span></h3>
-            {% if student.social_status %}
-                <h3 class="infostudent">Социальная справка: <span>есть</span></h3>
+            {% if student.photo_social_reference %}
+                <h3 class="infostudent">Социальная справка: <a href="{{ student.photo_social_reference.url }}"
+                                                               style="color: #46b4e3; text-decoration: none;">
+                    Социальная справка</a></h3>
             {% else %}
                 <h3 class="infostudent">Социальная справка: <span>нету</span></h3>
             {% endif %}
-            <h3 class="infostudent">Направление: <a href="{{ student.photo_social_reference.url }}"
-                                                    style="color: #46b4e3; text-decoration: none;">Социальная справка</a></h3>
-            <h3 class="infostudent">Направление: <span>{{ student.direction }}</span></h3>
+            <div style="display: flex; flex-direction: row; width: 700px; margin: 0 auto">
+                {% if request.user.roles == 'T' and not edit %}
+                    <a class="w-100 btn btn-primary btn-lg" style="margin-left: 10px"
+                       href="{% url 'edit_detail_student' pk=student.id %}">Отредактировать</a>
+                {% endif %}
+                <a class="w-100 btn btn-primary btn-lg" style="margin-left: 10px"
+                   href="{% url 'list_students' %}">Назад</a>
+            </div>
 
-        {% elif request.user.roles == 'T' %}
+        {% elif edit %}
             <form action="." method="post" enctype="multipart/form-data">
                 <div class="detailstudent">
                     <img src="{{ student.photo_student.url }}" alt="фото студента" width="350px" height="250px"
@@ -31,11 +38,52 @@
                             class="photostudent"></a>
                 </div>
                 {% csrf_token %}
-                {{ form.as_p }}
-                <input type="submit" value="Изменить" class="w-100 btn btn-primary btn-lg">
-                {#                <button class="w-100 btn btn-primary btn-lg" type="submit">Отредактировать</button>#}
+                {% for f in form %}
+{#                    {% if f.name == 'first_name' %}#}
+                    {#                        <h6>#}
+                    {#                            <p>#}
+                    {#                                <label class="form-label" for="{{ f.id_for_label }}"#}
+                    {#                                       style="margin-right: 20px">{{ f.label }}:</label>#}
+                    {#                                <input type="text" name="first_name" class="form-control" maxlength="30"#}
+                    {#                                       id="id_last_name" value={{ student.student.first_name }}>#}
+                    {#                            </p>#}
+                    {#                        </h6>#}
+                    {#                        <div class="form-error">{{ f.errors }}</div>#}
+                    {#                    {% elif f.name ==  'last_name' %}#}
+                    {#                        <h6>#}
+                    {#                            <p>#}
+                    {#                                <label class="form-label" for="{{ f.id_for_label }}"#}
+                    {#                                       style="margin-right: 20px">{{ f.label }}:</label>#}
+                    {#                                <input type="text" name="first_name" class="form-control" maxlength="30"#}
+                    {#                                       id="id_last_name" value={{ student.student.last_name }}>#}
+                    {#                            </p>#}
+                    {#                        </h6>#}
+                    {#                        <div class="form-error">{{ f.errors }}</div>#}
+                    {#                    {% elif f.name ==  'middle_name' %}#}
+                    {#                        <h6>#}
+                    {#                            <p>#}
+                    {#                                <label class="form-label" for="{{ f.id_for_label }}"#}
+                    {#                                       style="margin-right: 20px">{{ f.label }}:</label>#}
+                    {#                                <input type="text" name="first_name" class="form-control" maxlength="30"#}
+                    {#                                       id="id_last_name" value={{ student.student.middle_name }}>#}
+                    {#                            </p>#}
+                    {#                        </h6>#}
+                    {#                        <div class="form-error">{{ f.errors }}</div>#}
+                    {#                    {% else %}#}
+                    {#                        <h6><p><label class="form-label" for="{{ f.id_for_label }}"#}
+                    {#                                      style="margin-right: 20px">{{ f.label }}:</label>{{ f }}</p></h6>#}
+                    {#                        <div class="form-error">{{ f.errors }}</div>#}
+                    {#                    {% endif %}#}
+                    <h6><p><label class="form-label" for="{{ f.id_for_label }}"
+                                  style="margin-right: 20px">{{ f.label }}:</label>{{ f }}</p></h6>
+                    <div class="form-error">{{ f.errors }}</div>
+                {% endfor %}
+                <div style="display: flex; flex-direction: row; width: 700px; margin: 0 auto">
+                    <input type="submit" value="Изменить" class="w-100 btn btn-primary btn-lg">
+                    <a class="w-100 btn btn-primary btn-lg" style="margin-left: 10px"
+                       href="{% url 'detail_student' pk=student.id %}">отмена</a>
+                </div>
             </form>
-        {% else %}
         {% endif %}
     </div>
 

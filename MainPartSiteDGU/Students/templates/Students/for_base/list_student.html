@@ -9,20 +9,20 @@
                 <a class="djdt-width-20 btn btn-primary btn-lg" style="margin-left: 10px"
                    href="{% url 'list_students' %}">Сброс</a>
             </form>
-            {% for i in model %}
+            {% for m in model %}
                 <div class="d-flex bd-highlight mb-3" style="margin-left: 100px">
                     <div class="p-2 bd-highlight">
-                        <img src="{{ i.photo_student.url }}" alt="фото студента" width="250px" height="150px">
+                        <img src="{{ m.photo_student.url }}" alt="фото студента" width="250px" height="150px">
                     </div>
                     <div class="p-2 bd-highlight">
-                        <a href="{% url 'detail_student' i.pk %}" class="h2 style-href">{{ i.get_full_name }}</a>
-                        <p class="h3">{{ i.get_course_display }}</p>
-                        <p class="h3">{{ i.direction }}</p>
+                        <a href="{% url 'detail_student' m.pk %}" class="h2 style-href">{{ m.student.get_full_name }}</a>
+                        <p class="h3">{{ m.get_course_display }}</p>
+                        <p class="h3">{{ m.direction }}</p>
                     </div>
                 </div>
             {% endfor %}
             <ul class="pagination" style="margin-left: 600px">
-                {% for i in model.paginator.page_range %}
+                {% for i in paginator.page_range %}
                     <li class="page-item">
                         <a href="?page={{ i }}" class="page-link">{{ i }}</a>
                     </li>
