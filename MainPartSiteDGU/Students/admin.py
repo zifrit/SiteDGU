@@ -10,8 +10,8 @@ from django.contrib.auth.admin import UserAdmin
 
 
 admin.site.register(StatusStudent)
-admin.site.register(TypeDirection)
-# admin.site.register(CustomUser, UserAdmin)
+# admin.site.register(TypeDirection)
+# admin.site.register(CustomUser, Us    erAdmin)
 # admin.site.register(Events)
 admin.site.register(OrganizationSector)
 
@@ -27,7 +27,6 @@ class AdminProfileStudent(admin.ModelAdmin):
         'course',
 
     ]
-    # list_filter = ['time_create', ]
     list_display_links = ['id', 'student']
 
 
@@ -50,8 +49,9 @@ class AdminEvents(admin.ModelAdmin):
     list_filter = ['date']
 
 
-# @admin.register(Events)
-# class CourseAdmin(admin.ModelAdmin):
+@admin.register(TypeDirection)
+class CourseAdmin(admin.ModelAdmin):
+    list_display = ['name', 'id']
 #     list_display = ("name", "date", "view_students_link")
 #
 #     def view_students_link(self, obj):

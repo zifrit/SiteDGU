@@ -39,7 +39,11 @@ class BaseRegister(LoginRequiredMixin, generic.CreateView):
         return context
 
     def form_valid(self, form):
-        new_user = CustomUser.objects.create_user(username=form.cleaned_data['last_name'], password='Saider569')
+        new_user = CustomUser.objects.create_user(username=form.cleaned_data['last_name'], password='Saider569',
+                                                  first_name=form.cleaned_data['first_name'],
+                                                  last_name=form.cleaned_data['last_name'],
+                                                  middle_name=form.cleaned_data['middle_name'],
+                                                  )
         form.instance.student = new_user
         return super().form_valid(form)
 
@@ -110,24 +114,6 @@ class ListStudent(LoginRequiredMixin, generic.ListView):
         return context
 
 
-# class DetailStudent(LoginRequiredMixin, View):
-#
-#     def get(self, request, pk):
-#         model = ProfileStudent.objects.get(id=pk)
-#         form = FormFullRegisterStudent(instance=model)
-#         return render(request, 'Students/for_base/detail_student.html',
-#                       {'form': form, 'student': model, 'menu': menu, 'pk': pk})
-
-
-#
-#     def post(self, request, pk):
-#         model = ProfileStudent.objects.get(id=pk)
-#         form = FormFullRegisterStudent(request.POST, request.FILES, instance=model)
-#         if form.is_valid():
-#             form.save()
-#         return render(request, 'Students/for_base/detail_student.html',
-#                       {'form': form, 'student': model, 'menu': menu, 'pk': pk})
-
 class DetailStudent(LoginRequiredMixin, generic.DetailView):
     model = ProfileStudent
     template_name = 'Students/for_base/detail_student.html'
@@ -159,14 +145,15 @@ class EditStudent(LoginRequiredMixin, generic.UpdateView):
         )
 
     def form_valid(self, form):
+        first_name = self.request.POST['first_name']
+        last_name = self.request.POST['last_name']
+        middle_name = self.request.POST['middle_name']
+        user = CustomUser.objects.get(pk=self.kwargs['pk'] + 1)
+        user.first_name = first_name
+        user.last_name = last_name
+        user.middle_name = middle_name
+        user.save()
         return super().form_valid(form)
-
-    # def get_form_class(self):
-    #     # a = FormFullRegisterStudent(self.request, instance=self.object)
-    #     # form = a.save(commit=False)
-    #     # form.first_name = 'asdasd'
-    #     # form.save()
-    #     return FormFullRegisterStudent(instance=ProfileStudent.objects.first())
 
 
 class TypeRegisterStudent(LoginRequiredMixin, View):
@@ -179,7 +166,6 @@ class TypeRegisterStudent(LoginRequiredMixin, View):
 class CreateEvents(LoginRequiredMixin, generic.CreateView):
     form_class = FormCreateEvents
     template_name = 'Students/for_base/create_events.html'
-    success_url = '/create_events/'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -189,6 +175,9 @@ class CreateEvents(LoginRequiredMixin, generic.CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy('list_events')
 
 
 # class ListEvents(LoginRequiredMixin, View):

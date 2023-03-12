@@ -44,22 +44,23 @@ class FormAdvancedRegisterStudent(forms.ModelForm):
             'student_status': forms.Select(attrs={'class': 'form-select'}),
             'photo_student': forms.FileInput(attrs={'class': 'custom-file-input'}),
             'photo_social_reference': forms.FileInput(attrs={'class': 'custom-file-input'}),
-            'start_social_reference': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'ДД.ММ.ГГГГ'}),
-            'end_social_reference': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'ДД.ММ.ГГГГ'}),
+            'start_social_reference': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'ДД-ММ-ГГГГ'}),
+            'end_social_reference': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'ДД-ММ-ГГГГ'}),
 
         }
 
     def clean_start_social_reference(self):
-        date = self.cleaned_data['start_social_reference']
-        s = re.match(r'\d{2}.\d{2}.\d{4}', date)
-        if s == None:
+        date = str(self.cleaned_data['start_social_reference'])
+        s = re.match(r'\d{4}-\d{2}-\d{2}', date)
+        if s is None:
             raise ValidationError('введенная дата не соответствует шаблону')
         return date
 
     def clean_end_social_reference(self):
-        date = self.cleaned_data['end_social_reference']
-        s = re.match(r'\d{2}.\d{2}.\d{4}', date)
-        if s == None:
+        date = str(self.cleaned_data['end_social_reference'])
+        print(date)
+        s = re.match(r'\d{4}-\d{2}-\d{2}', date)
+        if s is None:
             raise ValidationError('введенная дата не соответствует шаблону')
         return date
 
@@ -85,21 +86,21 @@ class FormFullRegisterStudent(forms.ModelForm):
             'organization_sector': forms.Select(attrs={'class': 'form-select'}),
             'photo_student': forms.FileInput(attrs={'class': 'custom-file-input'}),
             'photo_social_reference': forms.FileInput(attrs={'class': 'custom-file-input'}),
-            'start_social_reference': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'ДД.ММ.ГГГГ'}),
-            'end_social_reference': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'ДД.ММ.ГГГГ'}),
+            'start_social_reference': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'ДД-ММ-ГГГГ'}),
+            'end_social_reference': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'ДД-ММ-ГГГГ'}),
         }
 
     def clean_start_social_reference(self):
-        date = self.cleaned_data['start_social_reference']
-        s = re.match(r'\d{2}.\d{2}.\d{4}', date)
-        if s == None:
+        date = str(self.cleaned_data['start_social_reference'])
+        s = re.match(r'\d{4}-\d{2}-\d{2}', date)
+        if s is None:
             raise ValidationError('введенная дата не соответствует шаблону')
         return date
 
     def clean_end_social_reference(self):
-        date = self.cleaned_data['end_social_reference']
-        s = re.match(r'\d{2}.\d{2}.\d{4}', date)
-        if s == None:
+        date = str(self.cleaned_data['end_social_reference'])
+        s = re.match(r'\d{4}-\d{2}-\d{2}', date)
+        if s is None:
             raise ValidationError('введенная дата не соответствует шаблону')
         return date
 

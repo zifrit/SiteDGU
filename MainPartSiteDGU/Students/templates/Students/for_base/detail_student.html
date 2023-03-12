@@ -39,44 +39,44 @@
                 </div>
                 {% csrf_token %}
                 {% for f in form %}
-{#                    {% if f.name == 'first_name' %}#}
-                    {#                        <h6>#}
-                    {#                            <p>#}
-                    {#                                <label class="form-label" for="{{ f.id_for_label }}"#}
-                    {#                                       style="margin-right: 20px">{{ f.label }}:</label>#}
-                    {#                                <input type="text" name="first_name" class="form-control" maxlength="30"#}
-                    {#                                       id="id_last_name" value={{ student.student.first_name }}>#}
-                    {#                            </p>#}
-                    {#                        </h6>#}
-                    {#                        <div class="form-error">{{ f.errors }}</div>#}
-                    {#                    {% elif f.name ==  'last_name' %}#}
-                    {#                        <h6>#}
-                    {#                            <p>#}
-                    {#                                <label class="form-label" for="{{ f.id_for_label }}"#}
-                    {#                                       style="margin-right: 20px">{{ f.label }}:</label>#}
-                    {#                                <input type="text" name="first_name" class="form-control" maxlength="30"#}
-                    {#                                       id="id_last_name" value={{ student.student.last_name }}>#}
-                    {#                            </p>#}
-                    {#                        </h6>#}
-                    {#                        <div class="form-error">{{ f.errors }}</div>#}
-                    {#                    {% elif f.name ==  'middle_name' %}#}
-                    {#                        <h6>#}
-                    {#                            <p>#}
-                    {#                                <label class="form-label" for="{{ f.id_for_label }}"#}
-                    {#                                       style="margin-right: 20px">{{ f.label }}:</label>#}
-                    {#                                <input type="text" name="first_name" class="form-control" maxlength="30"#}
-                    {#                                       id="id_last_name" value={{ student.student.middle_name }}>#}
-                    {#                            </p>#}
-                    {#                        </h6>#}
-                    {#                        <div class="form-error">{{ f.errors }}</div>#}
-                    {#                    {% else %}#}
-                    {#                        <h6><p><label class="form-label" for="{{ f.id_for_label }}"#}
-                    {#                                      style="margin-right: 20px">{{ f.label }}:</label>{{ f }}</p></h6>#}
-                    {#                        <div class="form-error">{{ f.errors }}</div>#}
-                    {#                    {% endif %}#}
-                    <h6><p><label class="form-label" for="{{ f.id_for_label }}"
-                                  style="margin-right: 20px">{{ f.label }}:</label>{{ f }}</p></h6>
-                    <div class="form-error">{{ f.errors }}</div>
+                    {% if f.name == 'first_name' %}
+                        <h6>
+                            <p>
+                                <label class="form-label" for="{{ f.id_for_label }}"
+                                       style="margin-right: 20px">{{ f.label }}:</label>
+                                <input type="text" name="first_name" class="form-control" maxlength="30"
+                                       id="id_last_name" value={{ student.student.first_name }}>
+                            </p>
+                        </h6>
+                        <div class="form-error">{{ f.errors }}</div>
+                    {% elif f.name ==  'last_name' %}
+                        <h6>
+                            <p>
+                                <label class="form-label" for="{{ f.id_for_label }}"
+                                       style="margin-right: 20px">{{ f.label }}:</label>
+                                <input type="text" name="last_name" class="form-control" maxlength="30"
+                                       id="id_last_name" value={{ student.student.last_name }}>
+                            </p>
+                        </h6>
+                        <div class="form-error">{{ f.errors }}</div>
+                    {% elif f.name ==  'middle_name' %}
+                        <h6>
+                            <p>
+                                <label class="form-label" for="{{ f.id_for_label }}"
+                                       style="margin-right: 20px">{{ f.label }}:</label>
+                                <input type="text" name="middle_name" class="form-control" maxlength="30"
+                                       id="id_last_name" value={{ student.student.middle_name }}>
+                            </p>
+                        </h6>
+                        <div class="form-error">{{ f.errors }}</div>
+                    {% else %}
+                        <h6><p><label class="form-label" for="{{ f.id_for_label }}"
+                                      style="margin-right: 20px">{{ f.label }}:</label>{{ f }}</p></h6>
+                        <div class="form-error">{{ f.errors }}</div>
+                    {% endif %}
+                    {#                    <h6><p><label class="form-label" for="{{ f.id_for_label }}"#}
+                    {#                                  style="margin-right: 20px">{{ f.label }}:</label>{{ f }}</p></h6>#}
+                    {#                    <div class="form-error">{{ f.errors }}</div>#}
                 {% endfor %}
                 <div style="display: flex; flex-direction: row; width: 700px; margin: 0 auto">
                     <input type="submit" value="Изменить" class="w-100 btn btn-primary btn-lg">
