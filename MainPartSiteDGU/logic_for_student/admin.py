@@ -1,3 +1,12 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Events
+
+
+@admin.register(Events)
+class AdminEvents(admin.ModelAdmin):
+    list_display = ['name',
+                    'id',
+                    'date',
+                    'user']
+    list_filter = ['date']
