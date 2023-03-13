@@ -1,3 +1,4 @@
+from django.contrib.admin.forms import AdminPasswordChangeForm
 from django.urls import reverse
 from django.utils.html import format_html
 from django.utils.http import urlencode
@@ -5,13 +6,14 @@ from django.utils.http import urlencode
 from django.contrib import admin
 from .models import *
 from django.contrib.auth.admin import UserAdmin
+from django.utils.translation import gettext_lazy as _
 
 # Register your models here.
 
 
 admin.site.register(StatusStudent)
 # admin.site.register(TypeDirection)
-# admin.site.register(CustomUser, Us    erAdmin)
+# admin.site.register(CustomUser, UserAdmin)
 # admin.site.register(Events)
 admin.site.register(OrganizationSector)
 
@@ -31,13 +33,27 @@ class AdminProfileStudent(admin.ModelAdmin):
 
 
 @admin.register(CustomUser)
-class AdminStudent(admin.ModelAdmin):
+class AdminStudent(UserAdmin):
     list_display = ['username',
                     'id',
                     'roles',
                     'is_active',
                     'is_staff']
     list_filter = ['roles']
+    fieldsets = (
+        (None, {
+            'fields': ('username', 'password')
+        }),
+        (_('Personal info'), {
+            'fields': ('first_name', 'last_name', 'middle_name', 'email', 'roles')
+        }),
+        (_('Permissions'), {
+            'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions'),
+        }),
+        (_('Important dates'), {
+            'fields': ('last_login', 'date_joined')
+        }),
+    )
 
 
 @admin.register(Events)

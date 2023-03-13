@@ -13,7 +13,7 @@
     {% else %}
         <div class="container" style="display: flex">
             <div class="col-sm-6 " style="margin-right: 150px">
-                <form action="." method="post" class="needs-validation" enctype="multipart/form-data">
+                <form action="" method="post" class="needs-validation" enctype="multipart/form-data">
                     {% csrf_token %}
                     {% for f in form %}
                         <p><label class="form-check-label" for="{{ f.id_for_label }}">{{ f.label }}:</label> {{ f }}</p>

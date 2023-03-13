@@ -1,15 +1,11 @@
 from django.contrib.auth import logout
-from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView, LogoutView
-from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic import DetailView, ListView
-
+from django.views import generic, View
 import logging
 from .forms import *
-from django.views import generic, View
-
+from ExecutableCode.new_password import new_password
 # permission
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
 
@@ -39,7 +35,7 @@ class BaseRegister(LoginRequiredMixin, generic.CreateView):
         return context
 
     def form_valid(self, form):
-        new_user = CustomUser.objects.create_user(username=form.cleaned_data['last_name'], password='Saider569',
+        new_user = CustomUser.objects.create_user(username=form.cleaned_data['last_name'], password=new_password(16),
                                                   first_name=form.cleaned_data['first_name'],
                                                   last_name=form.cleaned_data['last_name'],
                                                   middle_name=form.cleaned_data['middle_name'],
@@ -148,7 +144,7 @@ class EditStudent(LoginRequiredMixin, generic.UpdateView):
         first_name = self.request.POST['first_name']
         last_name = self.request.POST['last_name']
         middle_name = self.request.POST['middle_name']
-        user = CustomUser.objects.get(pk=self.kwargs['pk'] + 1)
+        user = self.object.student
         user.first_name = first_name
         user.last_name = last_name
         user.middle_name = middle_name
