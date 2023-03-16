@@ -18,7 +18,8 @@ menu = [{'student': [{'title': "Главная", 'url_name': 'list_events'},
          }]
 
 
-class CreateEvents(LoginRequiredMixin, generic.CreateView):
+class CreateEvents(LoginRequiredMixin, PermissionRequiredMixin, generic.CreateView):
+    permission_required = ['logic_for_student.add_events']
     form_class = FormCreateEvents
     template_name = 'logic_for_student/templates/create_events.html'
 
@@ -36,7 +37,7 @@ class CreateEvents(LoginRequiredMixin, generic.CreateView):
 
 
 class ListEvents(LoginRequiredMixin, PermissionRequiredMixin, generic.ListView):
-    permission_required = ['Students.view_events']
+    permission_required = ['logic_for_student.view_events']
     paginate_by = 5
     model = Events
     template_name = 'logic_for_student/templates/list_events.html'
@@ -51,7 +52,8 @@ class ListEvents(LoginRequiredMixin, PermissionRequiredMixin, generic.ListView):
         return context
 
 
-class DetailEvent(LoginRequiredMixin, generic.DetailView):
+class DetailEvent(LoginRequiredMixin, PermissionRequiredMixin, generic.DetailView):
+    permission_required = ['logic_for_student.change_events']
     model = Events
     template_name = 'logic_for_student/templates/detail_events.html'
     context_object_name = 'ditail_event'
@@ -63,11 +65,15 @@ class DetailEvent(LoginRequiredMixin, generic.DetailView):
         return context
 
 
-class EditEvent(LoginRequiredMixin, generic.UpdateView):
+class EditEvent(LoginRequiredMixin, UserPassesTestMixin, PermissionRequiredMixin, generic.UpdateView):
+    permission_required = ''
     model = Events
     form_class = FormCreateEvents
     template_name = 'logic_for_student/templates/detail_events.html'
     context_object_name = 'ditail_event'
+
+    def test_func(self):
+        return self.request.user == self.get_object().user
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

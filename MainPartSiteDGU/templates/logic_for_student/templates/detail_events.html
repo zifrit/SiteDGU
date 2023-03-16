@@ -1,5 +1,11 @@
 {% extends 'Students/Base_student.html' %}
-
+{% block title %}
+    {% if not edit %}
+        Мероприятие
+    {% elif ditail_event.user == request.user and edit %}
+        Редактирование мероприятия
+    {% endif %}
+{% endblock %}
 {% block content %}
     <div class="container">
         <form action="" method="post" enctype="multipart/form-data">

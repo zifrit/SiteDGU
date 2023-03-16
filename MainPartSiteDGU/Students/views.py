@@ -6,10 +6,10 @@ from django.views import generic, View
 import logging
 from .forms import *
 from ExecutableCode.new_password import new_password
-# permission
+from django.contrib.auth.models import Group
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
 
-log = logging.getLogger('my_log')
+# log = logging.getLogger('my_log')
 
 menu = [{'student': [{'title': "Главная", 'url_name': 'list_events'},
                      {'title': "Добавить Мероприятие", 'url_name': 'create_events'}],
@@ -23,10 +23,15 @@ menu = [{'student': [{'title': "Главная", 'url_name': 'list_events'},
          }]
 
 
-class BaseRegister(LoginRequiredMixin, generic.CreateView):
+class BaseRegister(LoginRequiredMixin, PermissionRequiredMixin, generic.CreateView):
+    permission_required = ['Students.add_customuser', 'Students.change_customuser', 'Students.view_customuser', ]
     form_class = FormBaseRegisterStudent
     template_name = 'Students/templates/add_student.html'
-    success_url = '/type_reg_student/'
+
+    def get_success_url(self):
+        return reverse(
+            'type_reg_student',
+        )
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -35,11 +40,14 @@ class BaseRegister(LoginRequiredMixin, generic.CreateView):
         return context
 
     def form_valid(self, form):
+        group = Group.objects.get(name='Студент')
         new_user = CustomUser.objects.create_user(username=form.cleaned_data['last_name'], password=new_password(16),
                                                   first_name=form.cleaned_data['first_name'],
                                                   last_name=form.cleaned_data['last_name'],
                                                   middle_name=form.cleaned_data['middle_name'],
                                                   )
+        new_user.groups.add(group)
+        new_user.save()
         form.instance.student = new_user
         return super().form_valid(form)
 
@@ -60,9 +68,12 @@ class Login(LoginView):
         return reverse_lazy('list_students')
 
 
-class Register(generic.CreateView):
+class Register(UserPassesTestMixin, generic.CreateView):
     form_class = CustomUserCreationForm
     template_name = 'Students/templates/login.html'
+
+    def test_func(self):
+        return self.request.user.is_superuser
 
     def get_success_url(self):
         return reverse_lazy('list_students')
@@ -73,7 +84,8 @@ def logout_system(request):
     return redirect('login')
 
 
-class ListStudent(LoginRequiredMixin, generic.ListView):
+class ListStudent(LoginRequiredMixin, PermissionRequiredMixin, generic.ListView):
+    permission_required = ['Students.view_customuser']
     template_name = 'Students/templates/list_student.html'
     paginate_by = 5
     model = ProfileStudent
@@ -84,8 +96,13 @@ class ListStudent(LoginRequiredMixin, generic.ListView):
         context['menu'] = menu
         return context
 
+    def get_queryset(self):
+        return ProfileStudent.objects.select_related('student', 'student_status', 'organization_sector',
+                                                     'direction')
 
-class DetailStudent(LoginRequiredMixin, generic.DetailView):
+
+class DetailStudent(LoginRequiredMixin, PermissionRequiredMixin, generic.DetailView):
+    permission_required = ['Students.view_customuser']
     model = ProfileStudent
     template_name = 'Students/templates/detail_student.html'
     context_object_name = 'student'
@@ -97,7 +114,8 @@ class DetailStudent(LoginRequiredMixin, generic.DetailView):
         return context
 
 
-class EditStudent(LoginRequiredMixin, generic.UpdateView):
+class EditStudent(LoginRequiredMixin, PermissionRequiredMixin, generic.UpdateView):
+    permission_required = ['Students.add_customuser', 'Students.change_customuser', ]
     model = ProfileStudent
     template_name = 'Students/templates/detail_student.html'
     context_object_name = 'student'
@@ -127,7 +145,8 @@ class EditStudent(LoginRequiredMixin, generic.UpdateView):
         return super().form_valid(form)
 
 
-class TypeRegisterStudent(LoginRequiredMixin, View):
+class TypeRegisterStudent(LoginRequiredMixin, PermissionRequiredMixin, View):
+    permission_required = ['Students.add_customuser', ]
 
     def get(self, request):
         button = [('Базовая', 'base_register'), ('Расширенная', 'advanced_register'), ('Полная', 'full_register')]

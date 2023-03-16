@@ -21,15 +21,23 @@ class AdminProfileStudent(admin.ModelAdmin):
     ]
     list_display_links = ['id', 'student']
 
+    def get_queryset(self, request):
+        return ProfileStudent.objects.select_related('student', 'student_status', 'organization_sector', 'direction')
+
 
 @admin.register(CustomUser)
 class AdminStudent(UserAdmin):
-    list_display = ['username',
-                    'id',
+    list_display = ['id',
+                    'username',
                     'roles',
                     'is_active',
                     'is_staff']
     list_filter = ['roles']
+    list_display_links = ['id', 'username']
+    list_editable = ['roles',
+                     'is_active',
+                     'is_staff']
+    ordering = ['id', 'username']
     fieldsets = (
         (None, {
             'fields': ('username', 'password')

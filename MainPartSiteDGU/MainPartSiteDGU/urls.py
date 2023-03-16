@@ -21,7 +21,8 @@ from . import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('Students.urls')),
+    path('student/', include('Students.urls')),
+    path('', include('logic_for_student.urls')),
     path('api/', include('Api.urls')),
     path('__debug__/', include('debug_toolbar.urls')),
     path('auth/', include('djoser.urls')),

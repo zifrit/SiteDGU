@@ -43,6 +43,9 @@ INSTALLED_APPS = [
 
     'Api',
     'Students',
+    'logic_for_student',
+    'api_user',
+    'api_logic',
 
     'rest_framework',
     'debug_toolbar',

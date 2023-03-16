@@ -1,5 +1,11 @@
 {% extends 'Students/Base_student.html' %}
-
+{% block title %}
+    {% if not edit %}
+        Студент
+    {% else %}
+        Редактирование студента
+    {% endif %}
+{% endblock %}
 {% block content %}
     <div class="container">
         {% if not edit %}

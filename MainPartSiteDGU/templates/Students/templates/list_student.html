@@ -1,4 +1,7 @@
 {% extends 'Students/Base_student.html' %}
+{% block title %}
+Список студентов
+{% endblock %}
 {% block content %}
     <div class="container">
         {% if request.user.roles != "S" %}
