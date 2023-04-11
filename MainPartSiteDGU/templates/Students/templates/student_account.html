@@ -1,0 +1,68 @@
+{% extends 'Students/Base_student.html' %}
+{% block title %}
+    Личный кабинет
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <form action="" method="post" enctype="multipart/form-data">
+            <div class="detailstudent">
+                <img src="{{ account.photo_student.url }}" alt="фото студента" width="350px" height="250px"
+                     class="photostudent">
+                <a href="{{ account.photo_social_reference.url }}"><img
+                        src="{{ account.photo_social_reference.url }}" alt="фото студента"
+                        width="350px" height="250px"
+                        class="photostudent"></a>
+            </div>
+            {% csrf_token %}
+            <h3 class="infostudent">ФИО: <span>{{ account.student.get_full_name }}</span></h3>
+            <h3 class="infostudent">Статус: <span>{{ account.student_status }}</span></h3>
+            <h3 class="infostudent">Курс: <span>{{ account.get_course_display }}</span></h3>
+            <h3 class="infostudent">Направление: <span>{{ account.direction }}</span></h3>
+            {% if account.photo_social_reference %}
+                <h3 class="infostudent">Социальная справка: <span>Есть</span></h3>
+            {% else %}
+                <h3 class="infostudent">Социальная справка: <span>Нет</span></h3>
+            {% endif %}
+
+            {#            {% for f in form %}#}
+            {#                {% if f.name == 'first_name' %}#}
+            {#                    <h6>#}
+            {#                        <p>#}
+            {#                            <label class="form-label" for="{{ f.id_for_label }}"#}
+            {#                                   style="margin-right: 20px">{{ f.label }}:</label>#}
+            {#                            <input type="text" name="first_name" class="form-control" maxlength="30"#}
+            {#                                   id="id_last_name" value={{ account.student.first_name }}>#}
+            {#                        </p>#}
+            {#                    </h6>#}
+            {#                    <div class="form-error">{{ f.errors }}</div>#}
+            {#                {% elif f.name ==  'last_name' %}#}
+            {#                    <h6>#}
+            {#                        <p>#}
+            {#                            <label class="form-label" for="{{ f.id_for_label }}"#}
+            {#                                   style="margin-right: 20px">{{ f.label }}:</label>#}
+            {#                            <input type="text" name="last_name" class="form-control" maxlength="30"#}
+            {#                                   id="id_last_name" value={{ account.student.last_name }}>#}
+            {#                        </p>#}
+            {#                    </h6>#}
+            {#                    <div class="form-error">{{ f.errors }}</div>#}
+            {#                {% elif f.name ==  'middle_name' %}#}
+            {#                    <h6>#}
+            {#                        <p>#}
+            {#                            <label class="form-label" for="{{ f.id_for_label }}"#}
+            {#                                   style="margin-right: 20px">{{ f.label }}:</label>#}
+            {#                            <input type="text" name="middle_name" class="form-control" maxlength="30"#}
+            {#                                   id="id_last_name" value={{ account.student.middle_name }}>#}
+            {#                        </p>#}
+            {#                    </h6>#}
+            {#                    <div class="form-error">{{ f.errors }}</div>#}
+            {#                {% else %}#}
+            {#                    <h6><p><label class="form-label" for="{{ f.id_for_label }}"#}
+            {#                                  style="margin-right: 20px">{{ f.label }}:</label>{{ f }}</p></h6>#}
+            {#                    <div class="form-error">{{ f.errors }}</div>#}
+            {#                {% endif %}#}
+            {#            {% endfor %}#}
+        {{ test }}
+        </form>
+    </div>
+
+{% endblock %}

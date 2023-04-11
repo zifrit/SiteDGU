@@ -4,6 +4,7 @@ from Students.models import *
 
 
 class Events(models.Model):
+    """Model Events."""
     name = models.CharField(max_length=255, verbose_name='Название мероприятия')
     photo = models.FileField(upload_to='Events/%Y/%m.%d/', verbose_name='Фото мероприятия')
     text = models.TextField(verbose_name='текст')

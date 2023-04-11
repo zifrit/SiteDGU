@@ -7,14 +7,16 @@ from .forms import *
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
 
 menu = [{'student': [{'title': "Главная", 'url_name': 'list_events'},
-                     {'title': "Добавить Мероприятие", 'url_name': 'create_events'}],
+                     {'title': "Добавить Мероприятие", 'url_name': 'create_events'},
+                     {'title': "Личный кабинет", 'url_name': 'account'}],
          'teacher': [{'title': "Главная", 'url_name': 'list_events'},
                      {'title': "Добавить Мероприятие", 'url_name': 'create_events'},
                      {'title': "Список студентов ", 'url_name': 'list_students'},
                      {'title': "Добавить студента", 'url_name': 'type_reg_student'}],
          'birds': [{'title': "Главная", 'url_name': 'list_events'},
                    {'title': "Добавить Мероприятие", 'url_name': 'create_events'},
-                   {'title': "Список студентов ", 'url_name': 'list_students'}],
+                   {'title': "Список студентов ", 'url_name': 'list_students'},
+                   {'title': "Личный кабинет", 'url_name': 'account'}],
          }]
 
 
@@ -53,7 +55,7 @@ class ListEvents(LoginRequiredMixin, PermissionRequiredMixin, generic.ListView):
 
 
 class DetailEvent(LoginRequiredMixin, PermissionRequiredMixin, generic.DetailView):
-    permission_required = ['logic_for_student.change_events']
+    permission_required = ['logic_for_student.view_events']
     model = Events
     template_name = 'logic_for_student/templates/detail_events.html'
     context_object_name = 'ditail_event'
@@ -65,8 +67,7 @@ class DetailEvent(LoginRequiredMixin, PermissionRequiredMixin, generic.DetailVie
         return context
 
 
-class EditEvent(LoginRequiredMixin, UserPassesTestMixin, PermissionRequiredMixin, generic.UpdateView):
-    permission_required = ''
+class EditEvent(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
     model = Events
     form_class = FormCreateEvents
     template_name = 'logic_for_student/templates/detail_events.html'

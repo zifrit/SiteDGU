@@ -20,6 +20,7 @@ from django.urls import path, include
 from . import settings
 
 urlpatterns = [
+    path('admin/doc/', include('django.contrib.admindocs.urls')),
     path('admin/', admin.site.urls),
     path('student/', include('Students.urls')),
     path('', include('logic_for_student.urls')),

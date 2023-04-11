@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.admindocs',
 
     'Api',
     'Students',
@@ -67,7 +68,7 @@ ROOT_URLCONF = 'MainPartSiteDGU.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -147,7 +148,6 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-
 LOGIN_URL = reverse_lazy('login')
 LOGIN_REDIRECT_URL = reverse_lazy('list_events')
 # Default primary key field type
@@ -160,59 +160,58 @@ INTERNAL_IPS = [
     '10.11.61.29'
 ]
 
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-    }
-}
-
-# LOGGING = {
-#     'version': 1,
-#     'disable_existing_loggers': False,
-#     'formatters': {
-#         'django_server': {
-#             '()': 'django.utils.log.ServerFormatter',
-#             'format': '[{server_time}] {message} {filename} {levelname}',
-#             'style': '{',
-#         },
-#         'json_format': {
-#             '()': CustomJsonFormatter,
-#         }
-#     },
-#     'handlers': {
-#         'console': {
-#             'level': 'INFO',
-#             'class': 'logging.StreamHandler',
-#             'formatter': 'django_server',
-#         },
-#         'system_log': {
-#             'class': 'logging.FileHandler',
-#             'formatter': 'django_server',
-#             'filename': 'my_log.log'
-#         },
-#         'my_log': {
-#             'class': 'logging.FileHandler',
-#             'formatter': 'json_format',
-#             'filename': 'system_log.log'
-#         },
-#     },
-#     'loggers': {
-#         'django': {
-#             'handlers': ['system_log', 'console'],
-#             'level': 'INFO',
-#             'propagate': False,
-#         },
-#         'my_log': {
-#             'handlers': ['my_log', 'console'],
-#             'level': 'INFO',
-#             'propagate': True,
-#         },
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
 #     }
 # }
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'django_server': {
+            '()': 'django.utils.log.ServerFormatter',
+            'format': '[{server_time}] {message} {filename} {levelname}',
+            'style': '{',
+        },
+        'json_format': {
+            '()': CustomJsonFormatter,
+        }
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'django_server',
+        },
+        'system_log': {
+            'class': 'logging.FileHandler',
+            'formatter': 'django_server',
+            'filename': 'my_log.log'
+        },
+        'my_log': {
+            'class': 'logging.FileHandler',
+            'formatter': 'json_format',
+            'filename': 'system_log.log'
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console', 'system_log'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'my_log': {
+            'handlers': ['my_log',],
+            'level': 'INFO',
+            'propagate': True,
+        },
+    }
+}
 
 REST_FRAMEWORK = {
-    # роегистрация идет только по токенам для проверки просто по логину паролю нужно закомитеть нижнее
+    # роегистрация идет только по токенам для проверки просто по логину паролю нужно закомитеть
+    # rest_framework_simplejwt.authentication.JWTAuthentication
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.BasicAuthentication',
@@ -222,9 +221,8 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',
     ],
-    'DATETIME_FORMAT': '%Y-%m-%d', #изминение вормы отображение даты ListCommentsSerializer
+    'DATETIME_FORMAT': '%Y-%m-%d',  # изменение формы отображение даты ListCommentsSerializer
 }
-
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(hours=1),
@@ -257,7 +255,6 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
-
 
 # DJOSER
 DJOSER = {

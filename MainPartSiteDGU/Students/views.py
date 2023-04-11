@@ -9,17 +9,19 @@ from ExecutableCode.new_password import new_password
 from django.contrib.auth.models import Group
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
 
-# log = logging.getLogger('my_log')
+log = logging.getLogger('my_log')
 
 menu = [{'student': [{'title': "Главная", 'url_name': 'list_events'},
-                     {'title': "Добавить Мероприятие", 'url_name': 'create_events'}],
+                     {'title': "Добавить Мероприятие", 'url_name': 'create_events'},
+                     {'title': "Личный кабинет", 'url_name': 'account'}],
          'teacher': [{'title': "Главная", 'url_name': 'list_events'},
                      {'title': "Добавить Мероприятие", 'url_name': 'create_events'},
                      {'title': "Список студентов ", 'url_name': 'list_students'},
                      {'title': "Добавить студента", 'url_name': 'type_reg_student'}],
          'birds': [{'title': "Главная", 'url_name': 'list_events'},
                    {'title': "Добавить Мероприятие", 'url_name': 'create_events'},
-                   {'title': "Список студентов ", 'url_name': 'list_students'}],
+                   {'title': "Список студентов ", 'url_name': 'list_students'},
+                   {'title': "Личный кабинет", 'url_name': 'account'}],
          }]
 
 
@@ -65,7 +67,7 @@ class Login(LoginView):
     template_name = 'Students/templates/login.html'
 
     def get_success_url(self):
-        return reverse_lazy('list_students')
+        return reverse_lazy('list_events')
 
 
 class Register(UserPassesTestMixin, generic.CreateView):
@@ -92,6 +94,7 @@ class ListStudent(LoginRequiredMixin, PermissionRequiredMixin, generic.ListView)
     context_object_name = 'model'
 
     def get_context_data(self, *, object_list=None, **kwargs):
+        log.info('test')
         context = super().get_context_data(**kwargs)
         context['menu'] = menu
         return context
@@ -151,3 +154,27 @@ class TypeRegisterStudent(LoginRequiredMixin, PermissionRequiredMixin, View):
     def get(self, request):
         button = [('Базовая', 'base_register'), ('Расширенная', 'advanced_register'), ('Полная', 'full_register')]
         return render(request, 'Students/templates/add_student.html', {'but': button, 'reg': True, 'menu': menu})
+
+
+class Account(LoginRequiredMixin, generic.TemplateView):
+    template_name = 'Students/templates/student_account.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # model = ProfileStudent.objects.select_related('student', 'student_status',
+        #                                               'organization_sector',
+        #                                               'direction').get(student=self.request.user)
+        model = self.request.user.profilestudent
+        context['menu'] = menu
+        context['account'] = model
+        context['form'] = FormFullRegisterStudent(instance=model)
+        return context
+
+
+class Test(generic.TemplateView):
+    template_name = 'Students/templates/test.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['test'] = 'ghbdtn'
+        return context
