@@ -1,106 +1,149 @@
-ul.hr {
-    display: flex;
-    margin: 0; /* Обнуляем значение отступов */
-    padding: 4px; /* Значение полей */
+/*Базовые настройки */
+html {
+  box-sizing: border-box;
 }
 
-ul.hr li {
-    display: inline; /* Отображать как строчный элемент */
-    margin-right: 5px; /* Отступ слева */
-    padding: 3px; /* Поля вокруг текста */
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
 }
 
-ul.hr a {
-    text-decoration: none;
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
-ul.hr a:hover {
-    color: #46b4e3; /* изменение при наведении цвета */
+img {
+  max-width: 100%;
 }
 
-
-.bot_login {
-    text-decoration: none;
-    font-size: 20px;
-    margin: 10px;
-    border: 0;
-    background: white; /* Цвет фона */
-    color: #0d6efd; /* Цвет текста */
-    padding: 5px; /* Поля вокруг текста */
-    border-radius: 5px; /* Уголки */
-    /*border-style: none; !* убриет рамки *!*/
+body {
+  font-family: 'font', sans-serif;
 }
 
-.bot_login:hover {
-    outline: none;
-    box-shadow: 0 0 0 4px #cbd6ee;
-    background: #0d6efd;
-    color: white;
+.card {
+  max-width: 300px;
 }
 
-.w-30 {
-    width: 250px;
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto;
+.container {
+    width: 60%;
+    margin: auto;
 }
-.events {
-    width: 650px;
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto;
+.dj_content {
+    margin: auto;
 }
-
-.bt-type-reg + .bt-type-reg {
-    margin-top: 15px;
+/* .lg-rg > a {
+  color: #1b22f5;
 }
+.lg-rg > a:hover {
+  color: #1b22f5;
+} */
+/*ul.hr {*/
+/*    display: flex;*/
+/*    margin: 0; !* Обнуляем значение отступов *!*/
+/*    padding: 4px; !* Значение полей *!*/
+/*}*/
 
-.bt-type-reg {
-    font-size: 30px;
-    text-align: center;
-    text-decoration: none;
-    border: 5px;
-    background: #0d6efd; /* Цвет фона */
-    color: white; /* Цвет текста */
-    padding: 5px; /* Поля вокруг текста */
-    border-radius: 5px; /* Уголки */
-}
+/*ul.hr li {*/
+/*    display: inline; !* Отображать как строчный элемент *!*/
+/*    margin-right: 5px; !* Отступ слева *!*/
+/*    padding: 3px; !* Поля вокруг текста *!*/
+/*}*/
 
-.bt-type-reg:hover {
-    outline: none;
-    box-shadow: 0 0 0 5px #cbd6ee;
-    background: #095bd6;
-    color: white;
-}
+/*ul.hr a {*/
+/*    text-decoration: none;*/
+/*}*/
 
+/*ul.hr a:hover {*/
+/*    color: #46b4e3; !* изменение при наведении цвета *!*/
+/*}*/
 
-.vxod {
-    margin: 150px 620px;
-}
-
-.style-href {
-    text-decoration: none
-}
-
-.style-href:hover {
-    color: #46b4e3;
+.lg-rg > a  {
+  text-decoration: none;
+  font-size: 20px;
+  margin: 10px;
+  border: 0;
+  background: white; /* Цвет фона */
+  color: #0d6efd; /* Цвет текста */
+  padding: 5px; /* Поля вокруг текста */
+  border-radius: 5px; /* Уголки */
+  border-style: none; /* убриет рамки */
 }
 
-.infostudent {
-    color: #163769;
+.lg-rg > a:hover{
+  /* border-bottom: 2px solid #0d6efd; */
+    box-shadow: 0 0 3px 0 #0d6efd;
+    /* background: #0d6efd; */
+    /* color: white; */
+}
+.lg-rg > a:visited{
+  color: #0d6efd;
 }
 
-.detailstudent {
-    text-align: center;
-}
-.detail-event {
-    text-align: center;
-}
+/*.w-30 {*/
+/*    width: 250px;*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    margin: 0 auto;*/
+/*}*/
+/*.events {*/
+/*    width: 650px;*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    margin: 0 auto;*/
+/*}*/
 
-.active_hrf {
+/*.bt-type-reg + .bt-type-reg {*/
+/*    margin-top: 15px;*/
+/*}*/
 
-}
+/*.bt-type-reg {*/
+/*    font-size: 30px;*/
+/*    text-align: center;*/
+/*    text-decoration: none;*/
+/*    border: 5px;*/
+/*    background: #0d6efd; !* Цвет фона *!*/
+/*    color: white; !* Цвет текста *!*/
+/*    padding: 5px; !* Поля вокруг текста *!*/
+/*    border-radius: 5px; !* Уголки *!*/
+/*}*/
 
-.nonactive_hrf {
+/*.bt-type-reg:hover {*/
+/*    outline: none;*/
+/*    box-shadow: 0 0 0 5px #cbd6ee;*/
+/*    background: #095bd6;*/
+/*    color: white;*/
+/*}*/
 
-}
+
+/*.vxod {*/
+/*    margin: 150px 620px;*/
+/*}*/
+
+/*.style-href {*/
+/*    text-decoration: none*/
+/*}*/
+
+/*.style-href:hover {*/
+/*    color: #46b4e3;*/
+/*}*/
+
+/*.infostudent {*/
+/*    color: #163769;*/
+/*}*/
+
+/*.detailstudent {*/
+/*    text-align: center;*/
+/*}*/
+/*.detail-event {*/
+/*    text-align: center;*/
+/*}*/
+
+/*.active_hrf {*/
+
+/*}*/
+
+/*.nonactive_hrf {*/
+
+/*}*/
