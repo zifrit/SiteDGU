@@ -8,7 +8,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from six import text_type
 
 from .serializers import *
-from Students.models import *
+from Students import models
 from rest_framework import generics
 from rest_framework.exceptions import NotFound
 from rest_framework.views import APIView
@@ -36,15 +36,23 @@ class MyTokenObtainView(TokenObtainPairView):
 
 
 class PricesPagination(PageNumberPagination):
-    page_size = 2
+    page_size = 3
     page_size_query_param = 'size'
 
+    # def get_paginated_response(self, data):
+    #     return Response({
+    #         'results': data,
+    #         'count': self.page.paginator.count
+    #     })
 
 
 class ListStudents(generics.ListAPIView):
-    queryset = ProfileStudent.objects.all()
-    pagination_class = PricesPagination
+    queryset = models.ProfileStudent.objects.select_related('student', 'direction') \
+        .only('student', 'direction', 'course', 'student__first_name', 'student__last_name', 'student__middle_name')
     serializer_class = SerializerListStudents
+    filterset_fields = [
+        'student'
+    ]
 
     # permission_classes = (IsAuthenticated,)
 

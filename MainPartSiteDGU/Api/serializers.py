@@ -10,6 +10,7 @@ class SerializerListStudents(serializers.ModelSerializer):
     direction = serializers.CharField(source='direction.name')
     course = serializers.CharField(source='get_course_display')
     days = serializers.SerializerMethodField()
+    full_name = serializers.CharField(source='student.get_full_name')
 
     class Meta:
         model = ProfileStudent
