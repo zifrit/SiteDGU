@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
 /*Базовые настройки */
 html {
   box-sizing: border-box;
@@ -7,6 +8,7 @@ html {
 *::before,
 *::after {
   box-sizing: inherit;
+  /* background-color: #24252A; */
 }
 
 a {
@@ -19,7 +21,11 @@ img {
 }
 
 body {
-  font-family: 'font', sans-serif;
+  font-family: 'Roboto Mono', monospace;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .card {
@@ -27,32 +33,110 @@ body {
 }
 
 .container {
-    width: 60%;
-    margin: auto;
-}
-.dj_content {
-    margin: auto;
+  width: 70%;
+  margin: 0 auto;
+  height: 100vh;
+  /* min-width: 1000px;
+  align-items: center; */
 }
 
 
-.lg-rg > a  {
+/*Базовые настройки коенц*/
+
+.log-reg,
+.out>a {
   text-decoration: none;
   font-size: 20px;
   margin: 10px;
   border: 0;
-  background: white; /* Цвет фона */
-  color: #0d6efd; /* Цвет текста */
-  padding: 5px; /* Поля вокруг текста */
-  border-radius: 5px; /* Уголки */
-  border-style: none; /* убриет рамки */
+  /* Цвет фона */
+  background: white;
+  /* Цвет текста */
+  color: #0d6efd;
+  /* Поля вокруг текста */
+  padding: 5px;
+  /* Уголки */
+  border-radius: 5px;
+  /* убриет рамки */
+  border-style: none;
 }
 
-.lg-rg > a:hover{
-  /* border-bottom: 2px solid #0d6efd; */
-    box-shadow: 0 0 3px 0 #0d6efd;
-    /* background: #0d6efd; */
-    /* color: white; */
+/* выполнения действия при навидении */
+.log-reg,
+.out>a:hover {
+  /* дымка вокруг кнопки */
+  box-shadow: 0 0 3px 0 #0d6efd;
+  /* цвет фона */
+  background: #0d6efd;
+  /* цвет текста */
+  color: whitesmoke;
 }
-.lg-rg > a:visited{
+
+/* .header-menu {
+  display: inline;
+  border-width: 10px;
+  background-color: red;
+} */
+/* .header-menu {
+  display: flex;
+
+
+  background-color: red;
+}
+.child-header-menu {
+
+} */
+.header_menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header_menu>li,
+a {
+  text-decoration: none;
+  font-size: 20px;
+}
+
+.logo {
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+}
+
+.nav_menu__links {
+  list-style: none;
+  padding: 0;
+}
+
+.nav_menu__links > li {
+  display: inline-block;
   color: #0d6efd;
+}
+
+.nav_menu__links > li > a {
+ transition: all 0.3s ease 0s;
+}
+
+.nav_menu__links > li > a:hover {
+ color: #46b4e3;
+}
+
+.list_event {
+  display: flex;
+  align-items: center;
+}
+.event_info{
+  margin: 0 0 0 20px;
+}
+
+.footer_base {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.content_event {
+  background-color: red;
 }
