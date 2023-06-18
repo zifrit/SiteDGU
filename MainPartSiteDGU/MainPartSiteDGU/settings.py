@@ -31,6 +31,22 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+# django-toolbar
+INTERNAL_IPS = [
+    "127.0.0.1",
+    '10.11.61.29'
+]
+'''раскометировать когда загружается в докер 
+нужен для того что бы работал django-toolbar'''
+# if DEBUG:
+#     import socket
+#     hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
+#     INTERNAL_IPS.append("10.0.0.2")
+#     INTERNAL_IPS.extend(
+#         [ip[: ip.rfind(".")] + ".1" for ip in ips]
+#     )
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -156,10 +172,7 @@ LOGIN_REDIRECT_URL = reverse_lazy('list_events')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-INTERNAL_IPS = [
-    "127.0.0.1",
-    '10.11.61.29'
-]
+
 
 # CACHES = {
 #     'default': {
@@ -173,7 +186,7 @@ LOGGING = {
     'formatters': {
         'django_server': {
             '()': 'django.utils.log.ServerFormatter',
-            'format': '[{server_time}] {message} {filename} {levelname}',
+            'format': '{asctime}] {levelname} {name} {message}',
             'style': '{',
         },
         'json_format': {

@@ -25,9 +25,10 @@ urlpatterns = [
     path('student/', include('Students.urls')),
     path('', include('logic_for_student.urls')),
     path('api/', include('Api.urls')),
-    path('__debug__/', include('debug_toolbar.urls')),
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.jwt')),
     path('drf_auth/', include('rest_framework.urls')),
 ]
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if settings.DEBUG:
+    path('__debug__/', include('debug_toolbar.urls')),
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
