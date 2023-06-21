@@ -3,20 +3,34 @@ version: "3.9"
 services:
   app:
     build:
-      dockerfile: ./dockerfile
-    command:
-      - "python"
-      - "manage.py"
-      - "runserver"
-      - "0.0.0.0:8001"
+      dockerfile: dockerfile
+    entrypoint: sh -c "
+      python manage.py migrate &&
+      python manage.py collectstatic --noinput &&
+      gunicorn MainPartSiteDGU.wsgi:application --bind 0.0.0.0:8000
+      "
     ports:
-      - "8000:8001"
+      - "8000:8000"
+    expose:
+      - 8000
+    volumes:
+      - ./MainPartSiteDGU/staticfiles:/app/static
+    env_file:
+      - .env
     logging:
       driver: loki
       options:
         loki-url: http://localhost:3100/loki/api/v1/push
-# нужно скачать -> docker plugin install grafana/loki-docker-driver:latest --alias loki --grant-all-permissions
-# что бы можно было отправлять логи с проекта в loki
+  nginx:
+    build: nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - app
+    volumes:
+      - ./MainPartSiteDGU/staticfiles:/static
+  # нужно скачать -> docker plugin install grafana/loki-docker-driver:latest --alias loki --grant-all-permissions
+  # что бы можно было отправлять логи с проекта в loki
   grafana:
     image: grafana/grafana:9.2.15
     environment:
@@ -29,4 +43,5 @@ services:
     image: grafana/loki:2.8.0
     ports:
       - "3100:3100"
-
+volumes:
+  static:
