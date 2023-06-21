@@ -15,6 +15,7 @@ services:
       - 8000
     volumes:
       - ./MainPartSiteDGU/staticfiles:/app/static
+      - ./MainPartSiteDGU/media:/app/media
     env_file:
       - .env
     logging:
@@ -29,6 +30,8 @@ services:
       - app
     volumes:
       - ./MainPartSiteDGU/staticfiles:/static
+      - ./MainPartSiteDGU/media:/media
+
   # нужно скачать -> docker plugin install grafana/loki-docker-driver:latest --alias loki --grant-all-permissions
   # что бы можно было отправлять логи с проекта в loki
   grafana:
