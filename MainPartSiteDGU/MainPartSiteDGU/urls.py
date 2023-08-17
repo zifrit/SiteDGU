@@ -21,6 +21,7 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/doc/', include('django.contrib.admindocs.urls')),
+    path('base/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
     path('student/', include('Students.urls')),
     path('', include('logic_for_student.urls')),

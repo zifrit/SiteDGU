@@ -188,48 +188,48 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #     }
 # }
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'formatters': {
-        'django_server': {
-            '()': 'django.utils.log.ServerFormatter',
-            'format': '{asctime}] {levelname} {name} {message}',
-            'style': '{',
-        },
-        'json_format': {
-            '()': CustomJsonFormatter,
-        }
-    },
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-            'formatter': 'django_server',
-        },
-        'system_log': {
-            'class': 'logging.FileHandler',
-            'formatter': 'django_server',
-            'filename': 'my_log.log'
-        },
-        'my_log': {
-            'class': 'logging.FileHandler',
-            'formatter': 'json_format',
-            'filename': 'system_log.log'
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['console', 'system_log'],
-            'level': 'INFO',
-            'propagate': True,
-        },
-        'my_log': {
-            'handlers': ['my_log',],
-            'level': 'INFO',
-            'propagate': True,
-        },
-    }
-}
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'formatters': {
+#         'django_server': {
+#             '()': 'django.utils.log.ServerFormatter',
+#             'format': '{asctime}] {levelname} {name} {message}',
+#             'style': '{',
+#         },
+#         'json_format': {
+#             '()': CustomJsonFormatter,
+#         }
+#     },
+#     'handlers': {
+#         'console': {
+#             'class': 'logging.StreamHandler',
+#             'formatter': 'django_server',
+#         },
+#         'system_log': {
+#             'class': 'logging.FileHandler',
+#             'formatter': 'django_server',
+#             'filename': 'my_log.log'
+#         },
+#         'my_log': {
+#             'class': 'logging.FileHandler',
+#             'formatter': 'json_format',
+#             'filename': 'system_log.log'
+#         },
+#     },
+#     'loggers': {
+#         'django': {
+#             'handlers': ['console', 'system_log'],
+#             'level': 'INFO',
+#             'propagate': True,
+#         },
+#         'my_log': {
+#             'handlers': ['my_log',],
+#             'level': 'INFO',
+#             'propagate': True,
+#         },
+#     }
+# }
 
 REST_FRAMEWORK = {
     # роегистрация идет только по токенам для проверки просто по логину паролю нужно закомитеть
