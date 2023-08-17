@@ -1,20 +1,16 @@
 {% extends 'Students/Base_student.html' %}
 {% block title %}
-Вход
+    Вход
 {% endblock %}
 {% block content %}
-    <body>
-    <div class="vxod">
-        <div class="col-sm-6 text-center" style="margin-left: 300px">
-            <form action="" method="post" class="needs-validation">
+    <div class="dj_login">
+        <form action="" method="post" class="needs-validation">
             {% csrf_token %}
-                {% for f in form %}
-                    <p><label class="h5 text-center" for="{{ f.id_for_label }}">{{ f.label }}</label> {{ f }}</p>
-                    <div class="form-error">{{ f.errors }}</div>
-                {% endfor %}
-                <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-            </form>
-        </div>
+            {% for filed in form %}
+                <label class="h5 text-center" for="{{ filed.id_for_label }}">{{ filed.label }}</label> {{ filed }}
+                {{ filed.errors }}
+            {% endfor %}
+            <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+        </form>
     </div>
-    </body>
 {% endblock %}

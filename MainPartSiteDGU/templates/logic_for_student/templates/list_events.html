@@ -3,11 +3,13 @@
     Список мероприятий
 {% endblock %}
 {% block content %}
-    <div class="container">
+    <div class="events">
         {% for model in models %}
             <div class="list_event">
                 <div class="event_image">
-                    <img src="{{ model.photo.url }}" alt="фото студента" width="250px" height="150px">
+                    <a href="{% url 'detail_events' model.pk %}" class="h2 style-href">
+                        <img src="{{ model.photo.url }}" alt="фото студента" width="250px" height="150px">
+                    </a>
                 </div>
                 <div class="event_info">
                     <a href="{% url 'detail_events' model.pk %}" class="h2 style-href">{{ model.name }}</a>
@@ -26,7 +28,7 @@
 
         {{ request.pas }}
     </div>
-    <ul class="pagination" style="margin-left: 600px">
+    <ul class="pagination">
         {% for i in paginator.page_range %}
             <li class="page-item">
                 <a href="?page={{ i }}" class="page-link">{{ i }}</a>

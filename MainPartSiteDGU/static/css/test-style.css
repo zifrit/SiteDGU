@@ -1,142 +1,152 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+
 /*Базовые настройки */
 html {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 *,
 *::before,
 *::after {
-  box-sizing: inherit;
-  /* background-color: #24252A; */
+    box-sizing: inherit;
+    /* background-color: #24252A; */
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
+    color: inherit;
+    text-decoration: none;
 }
 
 img {
-  max-width: 100%;
+    max-width: 100%;
 }
 
 body {
-  font-family: 'Roboto Mono', monospace;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+    font-family: 'Roboto Mono', monospace;
+    margin: 0;
+    padding: 0;
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    height: 100%;
 }
 
-.card {
-  max-width: 300px;
+header {
+    padding: 40px;
+    height: 200px;
+}
+
+.dj {
+    padding: 100px;
+    height: 40px;
+}
+
+footer {
+    padding: 100px;
+    height: 40px;
 }
 
 .container {
-  width: 70%;
-  margin: 0 auto;
-  height: 100vh;
-  /* min-width: 1000px;
-  align-items: center; */
+    max-width: 60%;
+    /*height: 100%;*/
+    margin-right: auto;
+    margin-left: auto;
+    background-color: lightgoldenrodyellow;
 }
 
-
-/*Базовые настройки коенц*/
-
-.log-reg,
-.out>a {
-  text-decoration: none;
-  font-size: 20px;
-  margin: 10px;
-  border: 0;
-  /* Цвет фона */
-  background: white;
-  /* Цвет текста */
-  color: #0d6efd;
-  /* Поля вокруг текста */
-  padding: 5px;
-  /* Уголки */
-  border-radius: 5px;
-  /* убриет рамки */
-  border-style: none;
+.nav_bar {
+    padding: 0 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-/* выполнения действия при навидении */
-.log-reg,
-.out>a:hover {
-  /* дымка вокруг кнопки */
-  box-shadow: 0 0 3px 0 #0d6efd;
-  /* цвет фона */
-  background: #0d6efd;
-  /* цвет текста */
-  color: whitesmoke;
+.dj_login label {
+    display: block;
 }
 
-/* .header-menu {
-  display: inline;
-  border-width: 10px;
-  background-color: red;
-} */
-/* .header-menu {
-  display: flex;
+/*.card {*/
+/*  max-width: 300px;*/
+/*}*/
+
+/*.container {*/
+/*  width: 70%;*/
+/*  margin: 0 auto;*/
+/*  height: 100vh;*/
+/*  !* min-width: 1000px;*/
+/*  align-items: center; *!*/
+/*}*/
 
 
-  background-color: red;
+/* HEADER*/
+.log-reg > a,
+.out > a {
+    color: #0d6efd;
+    padding: 5px;
+    border-radius: 5px;
+    text-decoration: none;
+    margin: 10px;
 }
-.child-header-menu {
 
-} */
-.header_menu {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.header_menu>li,
-a {
-  text-decoration: none;
-  font-size: 20px;
+.log-reg > a:hover,
+.out > a:hover {
+    box-shadow: 0 0 3px 0 #0d6efd;
+    background: #0d6efd;
+    color: whitesmoke;
+    transition: all 0.5s ease 0s;
 }
 
 .logo {
-  width: 60px;
-  height: 60px;
-  cursor: pointer;
+    width: 70px;
+    cursor: pointer;
 }
 
 .nav_menu__links {
-  list-style: none;
-  padding: 0;
+    list-style: none;
 }
 
 .nav_menu__links > li {
-  display: inline-block;
-  color: #0d6efd;
+    display: inline-block;
+    color: #0d6efd;
 }
 
 .nav_menu__links > li > a {
- transition: all 0.3s ease 0s;
+    transition: all 0.5s ease 0s;
 }
 
 .nav_menu__links > li > a:hover {
- color: #46b4e3;
+    font-size: 17px;
+    color: #46b4e3;
+}
+
+.nav_menu__links h4 {
+    margin: auto;
 }
 
 .list_event {
-  display: flex;
-  align-items: center;
-}
-.event_info{
-  margin: 0 0 0 20px;
+    display: flex;
 }
 
-.footer_base {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-shrink: 0;
-}
+/*.event_info {*/
+/*  margin: 0 0 0 20px;*/
+/*}*/
 
-.content_event {
-  background-color: red;
-}
+/*.footer_base {*/
+/*  display: flex;*/
+/*  justify-content: space-between;*/
+/*  align-items: center;*/
+
+/*}*/
+/*.footer_base ul {*/
+/*  list-style-type: none;*/
+/*}*/
+
+/*.events {*/
+/*  width: 70%;*/
+/*  margin: 0 auto;*/
+/*  height: 100vh;*/
+/*}*/
+
+/*.pagination {*/
+/*  align-items: center;*/
+/*  list-style-type: none;*/
+/*}*/
