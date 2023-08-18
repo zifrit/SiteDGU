@@ -9,58 +9,65 @@
     <link href="{% static 'css/test-style.css' %}" rel="stylesheet">
 </head>
 <body>
-<header>
-    <div class="nav_bar container">
-        <div>
-            <img src="{% static 'icon/logo.png' %}" alt="logo" class="logo">
-        </div>
-        {% if request.user.is_authenticated %}
+<div class="body">
+    <header>
+        <div class="nav_bar container">
             <div>
-                <ul class="nav_menu__links">
-                    {% if request.user.roles == "S" %}
-                        {% for element in menu.0.student %}
-                            <li><a href="{% url element.url_name %}" class=""><h4>{{ element.title }}</h4></a></li>
-                        {% endfor %}
-                    {% elif request.user.roles == "T" %}
-                        {% for element in menu.0.teacher %}
-                            <li><a href="{% url element.url_name %}" class=""><h4>{{ element.title }}</h4></a></li>
-                        {% endfor %}
-                    {% elif request.user.roles == "B" %}
-                        {% for element in menu.0.birds %}
-                            <li><a href="{% url element.url_name %}" class=""><h4>{{ element.title }}</h4></a></li>
-                        {% endfor %}
-                    {% endif %}
+                <img src="{% static 'icon/logo.png' %}" alt="logo" class="logo">
+            </div>
+            {% if request.user.is_authenticated %}
+                <div>
+                    <ul class="nav_menu__links">
+                        {% if request.user.roles == "S" %}
+                            {% for element in menu.0.student %}
+                                <li><a href="{% url element.url_name %}" class=""><h4>{{ element.title }}</h4></a></li>
+                            {% endfor %}
+                        {% elif request.user.roles == "T" %}
+                            {% for element in menu.0.teacher %}
+                                <li><a href="{% url element.url_name %}" class=""><h4>{{ element.title }}</h4></a></li>
+                            {% endfor %}
+                        {% elif request.user.roles == "B" %}
+                            {% for element in menu.0.birds %}
+                                <li><a href="{% url element.url_name %}" class=""><h4>{{ element.title }}</h4></a></li>
+                            {% endfor %}
+                        {% endif %}
+                    </ul>
+                </div>
+                <div class="out">
+                    <a href="{% url 'logout' %}">Logout</a>
+                </div>
+            {% else %}
+                <div class="log-reg">
+                    <a href="{% url 'login' %}">Login</a>
+                    <a href="{% url 'register' %}">Sign-up</a>
+                </div>
+            {% endif %}
+        </div>
+        <hr class="line">
+    </header>
+    <section class="dj container">
+        {% block content %}
+        {% endblock %}
+    </section>
+    <footer class="container">
+        <div>
+            <div class="footer_left">
+                <a href="/list_events" class="">
+                    <img src="{% static 'icon/logo.png' %}" alt="logo" class="logo">
+                </a>
+                <p class="">© 2022 Company, Inc</p>
+            </div>
+            <div class="footer_right">
+                <ul class="footer_list">
+                    <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Features</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Pricing</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
                 </ul>
             </div>
-            <div class="out">
-                <a href="{% url 'logout' %}">Logout</a>
-            </div>
-        {% else %}
-            <div class="log-reg">
-                <a href="{% url 'login' %}">Login</a>
-                <a href="{% url 'register' %}">Sign-up</a>
-            </div>
-        {% endif %}
-    </div>
-</header>
-<section class="dj container">
-    {% block content %}
-    {% endblock %}
-</section>
-<footer class="container">
-    <p class="">© 2022 Company, Inc</p>
-
-    <a href="/list_events" class="">
-        <img src="{% static 'icon/logo.png' %}" alt="logo" style="width: 60px; height: 60px">
-    </a>
-
-    <ul class="">
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Features</a></li>
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Pricing</a></li>
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
-    </ul>
-</footer>
+        </div>
+    </footer>
+</div>
 </body>
 </html>

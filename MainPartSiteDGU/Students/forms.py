@@ -76,8 +76,8 @@ class FormFullRegisterStudent(forms.ModelForm):
 
 
 class FormLogin_s(AuthenticationForm):
-    username = forms.CharField(label='Логин', widget=forms.TextInput(attrs={'class': 'form-control'}))
-    password = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    username = forms.CharField(label='Логин', widget=forms.TextInput(attrs={'class': 'form_input'}))
+    password = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'form_input'}))
 
 
 class CustomUserCreationForm(UserCreationForm):

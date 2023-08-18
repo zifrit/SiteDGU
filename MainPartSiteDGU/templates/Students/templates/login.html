@@ -7,10 +7,12 @@
         <form action="" method="post" class="needs-validation">
             {% csrf_token %}
             {% for filed in form %}
-                <label class="h5 text-center" for="{{ filed.id_for_label }}">{{ filed.label }}</label> {{ filed }}
-                {{ filed.errors }}
+                <div class="form_login">
+                    <label class="h5 text-center" for="{{ filed.id_for_label }}">{{ filed.label }}</label> {{ filed }}
+                    {{ filed.errors }}
+                </div>
             {% endfor %}
-            <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+            <input class="w-100 btn btn-lg btn-primary" type="submit" value="Sin-in">
         </form>
     </div>
 {% endblock %}
