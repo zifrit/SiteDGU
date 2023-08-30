@@ -17,9 +17,6 @@ a {
     text-decoration: none;
 }
 
-img {
-    max-width: 100%;
-}
 
 body {
     font-family: 'Roboto Mono', monospace;
@@ -68,10 +65,8 @@ footer > div {
 
 .container {
     max-width: 60%;
-    height: 100%;
     margin-right: auto;
     margin-left: auto;
-    /*background-color: lightgoldenrodyellow;*/
 }
 
 .nav_bar {
@@ -93,14 +88,35 @@ footer > div {
     font-size: 20px;
 }
 
-.dj_login input {
+.login_submit {
+    font-size: 15px;
+    display: block;
+    margin: 0 auto;
+    padding: 10px 40px;
+    appearance: none;
+    border: 0;
+    border-radius: 5px;
+    background: #4676D7;
+    color: #fff;
+}
+
+.login_submit:hover {
+    background: #145bfd;
+    box-shadow: 0 0 3px 0 #0d6efd;
+    color: whitesmoke;
+    transition: all 0.2s ease 0s;
+}
+
+.login_submit:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px #cbd6ee;
+}
+
+.form_input {
     display: block;
     width: 100%;
     margin: 10px 0;
     padding: 10px;
-}
-
-.form_input {
     border-radius: 10px;
     border: 1px solid #eee;
     transition: .3s border-color;
@@ -129,7 +145,7 @@ footer > div {
 
 .log-reg > a,
 .out > a {
-    color: #0d6efd;
+    color: #4676D7;
     padding: 5px;
     border-radius: 5px;
     text-decoration: none;
@@ -138,8 +154,8 @@ footer > div {
 
 .log-reg > a:hover,
 .out > a:hover {
-    box-shadow: 0 0 3px 0 #0d6efd;
-    background: #0d6efd;
+    box-shadow: 0 0 3px 0 #145bfd;
+    background: #145bfd;
     color: whitesmoke;
     transition: all 0.5s ease 0s;
 }
@@ -155,7 +171,7 @@ footer > div {
 
 .nav_menu__links > li {
     display: inline-block;
-    color: #0d6efd;
+    color: #4676D7;
 }
 
 .nav_menu__links > li > a {
@@ -164,16 +180,37 @@ footer > div {
 
 .nav_menu__links > li > a:hover {
     font-size: 22px;
-    color: #46b4e3;
+    color: #273fd1;
 }
 
 .nav_menu__links h4 {
     margin: auto;
 }
 
-.list_event {
+.list_event, .list_student {
+    margin-bottom: 10px;
+    padding: 15px 10px ;
     display: flex;
+    justify-content: space-between;
 }
+
+.event_info, .student_info {
+    text-align: right;
+}
+.event_info  a , .student_info a {
+    font-size: 30px;
+}
+.event_info  a:hover , .student_info a:hover {
+    color: #0d6efd;
+    text-decoration: underline;
+}
+
+.list_event img, .list_student img {
+    max-width: 450px;
+    max-height: 350px;
+}
+
+
 
 /*.event_info {*/
 /*  margin: 0 0 0 20px;*/
@@ -196,6 +233,37 @@ footer > div {
 /*}*/
 
 .pagination {
-    align-items: center;
-    list-style-type: none;
+    text-align: center;
+    margin: 0 0 20px 0;
+}
+
+.pagination ul {
+    margin: 20px 0 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.pagination ul li {
+    display: inline-block;
+    margin: 0 20px 0 0;
+}
+
+.pagination a {
+    color: #000;
+    font-size: 24px;
+    text-decoration: none;
+}
+
+.pagination .page-item {
+
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    padding: 8px 0 0 0;
+    border: 1px solid #d0d0d0;
+    border-radius: 30px;
+}
+
+.pagination .page-item:hover {
+    box-shadow: 3px 2px 1px #4676D7;
 }

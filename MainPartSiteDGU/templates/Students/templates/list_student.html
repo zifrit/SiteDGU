@@ -1,36 +1,33 @@
 {% extends 'Students/Base_student.html' %}
 {% block title %}
-Список студентов
+    Список студентов
 {% endblock %}
 {% block content %}
-    <div class="container">
+    <div>
         {% if request.user.roles != "S" %}
-            <form class="d-flex" role="search" method="post">
-                {% csrf_token %}
-                <input class="form-control me-2" type="search" placeholder="ФИО студента" name="FIO">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-                <a class="djdt-width-20 btn btn-primary btn-lg" style="margin-left: 10px"
-                   href="{% url 'list_students' %}">Сброс</a>
-            </form>
             {% for m in model %}
-                <div class="d-flex bd-highlight mb-3" style="margin-left: 100px">
-                    <div class="p-2 bd-highlight">
-                        <img src="{{ m.photo_student.url }}" alt="фото студента" width="250px" height="150px">
+                <div class="list_student data">
+                    <div class="student_image">
+                        <a href="{% url 'detail_student' m.pk %}">
+                            <img src="{{ m.photo_student.url }}" alt="фото студента">
+                        </a>
                     </div>
-                    <div class="p-2 bd-highlight">
-                        <a href="{% url 'detail_student' m.pk %}" class="h2 style-href">{{ m.student.get_full_name }}</a>
-                        <p class="h3">{{ m.get_course_display }}</p>
-                        <p class="h3">{{ m.direction }}</p>
+                    <div class="student_info">
+                        <a href="{% url 'detail_student' m.pk %}">{{ m.student.get_full_name }}</a>
+                        <h2>{{ m.get_course_display }}</h2>
+                        <h2>{{ m.direction }}</h2>
                     </div>
                 </div>
             {% endfor %}
-            <ul class="pagination" style="margin-left: 600px">
-                {% for i in paginator.page_range %}
-                    <li class="page-item">
-                        <a href="?page={{ i }}" class="page-link">{{ i }}</a>
-                    </li>
-                {% endfor %}
-            </ul>
+            <div class="pagination">
+                <ul>
+                    {% for page in paginator.page_range %}
+                        <li class="page-item">
+                            <a href="?page={{ page }}" class="page-link">{{ page }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
         {% endif %}
     </div>
 {% endblock %}

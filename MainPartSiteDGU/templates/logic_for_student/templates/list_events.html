@@ -3,36 +3,29 @@
     Список мероприятий
 {% endblock %}
 {% block content %}
-    <div class="events">
+    <div>
         {% for model in models %}
-            <div class="list_event">
+            <div class="list_event data">
                 <div class="event_image">
-                    <a href="{% url 'detail_events' model.pk %}" class="h2 style-href">
-                        <img src="{{ model.photo.url }}" alt="фото студента" width="250px" height="150px">
+                    <a href="{% url 'detail_events' model.pk %}">
+                        <img src="{{ model.photo.url }}" alt="фото мероприятия">
                     </a>
                 </div>
                 <div class="event_info">
-                    <a href="{% url 'detail_events' model.pk %}" class="h2 style-href">{{ model.name }}</a>
-                    <p class="h3">{{ model.text|truncatewords:50 }}</p>
-                    <p class="h3">{{ model.date }} {{ model.time }}</p>
+                    <a href="{% url 'detail_events' model.pk %}">{{ model.name }}</a>
+                    <h2>{{ model.text|truncatewords:50 }}</h2>
+                    <h2>{{ model.date }} {{ model.time }}</h2>
                 </div>
             </div>
         {% endfor %}
-        {#        <ul class="pagination" style="margin-left: 600px">#}
-        {#            {% for page in model.paginator.page_range %}#}
-        {#                <li class="page-item">#}
-        {#                    <a href="?page={{ page }}" class="page-link">{{ i }}</a>#}
-        {#                </li>#}
-        {#            {% endfor %}#}
-        {#        </ul>#}
-
-        {{ request.pas }}
     </div>
-    <ul class="pagination">
-        {% for i in paginator.page_range %}
-            <li class="page-item">
-                <a href="?page={{ i }}" class="page-link">{{ i }}</a>
-            </li>
-        {% endfor %}
-    </ul>
+    <div class="pagination">
+        <ul>
+            {% for page in paginator.page_range %}
+                <li class="page-item">
+                    <a href="?page={{ page }}" class="page-link">{{ page }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
 {% endblock %}
