@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UsernameField
 from django.core.exceptions import ValidationError
 # from ..MainPartSiteDGU.settings import AUTH_USER_MODEL
 from .models import *
@@ -24,14 +24,7 @@ class FormBaseRegisterStudent(forms.ModelForm):
         }
 
 
-class FormAdvancedRegisterStudent(forms.ModelForm):
-    first_name = forms.CharField(max_length=30, required=False, help_text='Имя', label='Имя',
-                                 widget=forms.TextInput(attrs={'class': 'form-control'}))
-    last_name = forms.CharField(max_length=30, required=False, help_text='Фамилия', label='Фамилия',
-                                widget=forms.TextInput(attrs={'class': 'form-control'}))
-    middle_name = forms.CharField(max_length=30, required=False, help_text='Отчество', label='Отчество',
-                                  widget=forms.TextInput(attrs={'class': 'form-control'}))
-
+class FormAdvancedRegisterStudent(FormBaseRegisterStudent):
     class Meta:
         model = ProfileStudent
         # fields = '__all__'
@@ -49,14 +42,7 @@ class FormAdvancedRegisterStudent(forms.ModelForm):
         }
 
 
-class FormFullRegisterStudent(forms.ModelForm):
-    first_name = forms.CharField(max_length=30, required=False, help_text='Имя', label='Имя',
-                                 widget=forms.TextInput(attrs={'class': 'form-control'}))
-    last_name = forms.CharField(max_length=30, required=False, help_text='Фамилия', label='Фамилия',
-                                widget=forms.TextInput(attrs={'class': 'form-control'}))
-    middle_name = forms.CharField(max_length=30, required=False, help_text='Отчество', label='Отчество',
-                                  widget=forms.TextInput(attrs={'class': 'form-control'}))
-
+class FormFullRegisterStudent(FormBaseRegisterStudent):
     class Meta:
         model = ProfileStudent
         fields = ('first_name', 'last_name', 'middle_name', 'direction', 'course', 'student_status', 'photo_student',
@@ -76,8 +62,12 @@ class FormFullRegisterStudent(forms.ModelForm):
 
 
 class FormLogin_s(AuthenticationForm):
-    username = forms.CharField(label='Логин', widget=forms.TextInput(attrs={'class': 'form_input'}))
-    password = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'form_input'}))
+    username = UsernameField(label='Логин', widget=forms.TextInput(attrs={'autofocus': True, 'class': 'form_input'}))
+    password = forms.CharField(
+        label="Password",
+        strip=False,
+        widget=forms.PasswordInput(attrs={'autocomplete': 'current-password', 'class': 'form_input'}),
+    )
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -91,6 +81,3 @@ class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = CustomUser
         fields = ('username', 'password1', 'password2',)
-
-
-
