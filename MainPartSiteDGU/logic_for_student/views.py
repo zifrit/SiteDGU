@@ -51,6 +51,7 @@ class ListEvents(LoginRequiredMixin, PermissionRequiredMixin, generic.ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         context['menu'] = menu
+        context['pagination'] = True
         return context
 
 

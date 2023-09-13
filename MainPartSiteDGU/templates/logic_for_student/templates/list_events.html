@@ -19,13 +19,4 @@
             </div>
         {% endfor %}
     </div>
-    <div class="pagination">
-        <ul>
-            {% for page in paginator.page_range %}
-                <li class="page-item">
-                    <a href="?page={{ page }}" class="page-link">{{ page }}</a>
-                </li>
-            {% endfor %}
-        </ul>
-    </div>
 {% endblock %}

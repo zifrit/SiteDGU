@@ -97,6 +97,7 @@ class ListStudent(LoginRequiredMixin, PermissionRequiredMixin, generic.ListView)
         log.info('test')
         context = super().get_context_data(**kwargs)
         context['menu'] = menu
+        context['pagination'] = True
         return context
 
     def get_queryset(self):
