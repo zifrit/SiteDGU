@@ -14,7 +14,7 @@ services:
     expose:
       - 8000
     volumes:
-      - ./MainPartSiteDGU/staticfiles:/app/static
+      - ./MainPartSiteDGU/static:/app/static
       - ./MainPartSiteDGU/media:/app/media
     env_file:
       - .env
@@ -29,7 +29,7 @@ services:
     depends_on:
       - app
     volumes:
-      - ./MainPartSiteDGU/staticfiles:/static
+      - ./MainPartSiteDGU/static:/static
       - ./MainPartSiteDGU/media:/media
 
   # нужно скачать -> docker plugin install grafana/loki-docker-driver:latest --alias loki --grant-all-permissions

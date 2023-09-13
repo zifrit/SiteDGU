@@ -9,9 +9,8 @@
     <link href="{% static 'css/test-style.css' %}" rel="stylesheet">
 </head>
 <body>
-<div class="body">
     <header>
-        <div class="nav_bar container">
+        <div class="nav_bar con">
             <div>
                 <img src="{% static 'icon/logo.png' %}" alt="logo" class="logo">
             </div>
@@ -45,11 +44,22 @@
         </div>
         <hr class="line">
     </header>
-    <section class="dj container">
+    <section class="dj con">
         {% block content %}
         {% endblock %}
     </section>
-    <footer class="container">
+    {% if pagination %}
+        <div class="pagination">
+            <ul>
+                {% for page in paginator.page_range %}
+                    <li class="page-item">
+                        <a href="?page={{ page }}" class="page-link">{{ page }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+    <footer class="con">
         <div>
             <div class="footer_left">
                 <a href="/list_events" class="">
@@ -68,6 +78,5 @@
             </div>
         </div>
     </footer>
-</div>
 </body>
 </html>
